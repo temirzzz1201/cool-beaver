@@ -5,7 +5,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   pages: true,
   css: ["~/assets/styles/main.css"],
+
   vite: {
     plugins: [tailwindcss()],
   },
+
+  modules: ["@nuxt/image", "nuxt-swiper"],
 });
