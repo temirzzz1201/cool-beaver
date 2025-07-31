@@ -4,7 +4,7 @@
       <h1 class="text-3xl font-bold text-gray-800">О нас</h1>
       <p class="mt-2 text-gray-600">
         Мы помогаем людям, оказавшимся в трудной жизненной ситуации,
-        предоставляя питание, временное проживание и помощь в трудоустройстве.
+        предоставляя питание, проживание и трудоустройство.
       </p>
     </header>
 
@@ -40,3 +40,9 @@
     </footer>
   </section>
 </template>
+
+<script setup lang="ts">
+definePageMeta({
+  prerender: true,
+});
+</script>

@@ -7,7 +7,14 @@
       <p class="pl-2">Крутые бобры</p>
     </nuxt-link>
     <ul class="flex items-center">
-      <li class="cursor-pointer mr-2" v-for="link in navLinks" :key="link.id">
+      <li
+        v-for="(link, index) in store.navLinks"
+        :key="link.id"
+        :class="[
+          'cursor-pointer',
+          index !== store.navLinks.length - 1 ? 'mr-5' : 'mr-0',
+        ]"
+      >
         <nuxt-link :to="link.link">
           {{ link.title }}
         </nuxt-link>
@@ -17,26 +24,6 @@
 </template>
 
 <script setup lang="ts">
-type NavLinks = {
-  id: number;
-  title: string;
-  link: string;
-};
-const navLinks = ref<NavLinks[]>([
-  {
-    id: 1,
-    title: "Статьи",
-    link: "/articles",
-  },
-  {
-    id: 2,
-    title: "О нас",
-    link: "/about",
-  },
-  {
-    id: 3,
-    title: "Контакты",
-    link: "/contacts",
-  },
-]);
+import { useMainStore } from "#imports";
+const store = useMainStore();
 </script>

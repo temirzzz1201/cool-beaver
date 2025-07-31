@@ -9,6 +9,11 @@
     </header>
 
     <div class="space-y-6">
+      <section class="mb-14">
+        <ClientOnly>
+          <app-map />
+        </ClientOnly>
+      </section>
       <section>
         <h2 class="text-2xl font-semibold text-gray-700">Телефон</h2>
         <p class="text-gray-600 mt-2">+7 (900) 123-45-67</p>
@@ -35,3 +40,9 @@
     </footer>
   </section>
 </template>
+
+<script setup lang="ts">
+definePageMeta({
+  prerender: true, // Страница будет предрендерена во время билда (SSG)
+});
+</script>

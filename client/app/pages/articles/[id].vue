@@ -13,17 +13,12 @@
 </template>
 
 <script setup lang="ts">
+import { type Article } from "~/types";
 const route = useRoute();
 const articleId = route.params.id;
 
-interface Article {
-  id: number;
-  title: string;
-  content: string;
-}
-
 const { data: article, error } = await useAsyncData<Article>(
   `article-${articleId}`,
-  () => $fetch(`http://localhost:5000/articles/${articleId}`)
+  () => $fetch(`${mainUrl}/articles/${articleId}`)
 );
 </script>

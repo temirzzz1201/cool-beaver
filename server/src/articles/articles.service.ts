@@ -16,6 +16,12 @@ export class ArticlesService {
     return this.articleModel.findAll();
   }
 
+  findLast() {
+    return this.articleModel.findOne({
+      order: [['id', 'DESC']],
+    });
+  }
+
   findOne(id: number) {
     return this.articleModel.findByPk(id);
   }

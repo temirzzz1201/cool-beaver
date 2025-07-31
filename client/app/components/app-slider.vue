@@ -1,5 +1,5 @@
 <template>
-  <ClientOnly>
+  <client-only>
     <swiper-container ref="containerRef" :init="false">
       <swiper-slide
         v-for="(slide, idx) in slides"
@@ -9,7 +9,7 @@
         Slide {{ idx + 1 }}
       </swiper-slide>
     </swiper-container>
-  </ClientOnly>
+  </client-only>
 </template>
 
 <script setup lang="ts">
@@ -32,10 +32,6 @@ const swiper = useSwiper(containerRef, {
     },
   },
 });
-
-onMounted(() => {
-  console.log(swiper.instance);
-});
 </script>
 
 <style lang="css">
@@ -44,7 +40,7 @@ swiper-slide {
   justify-content: center;
   align-items: center;
   font-size: 18px;
-  height: 20vh;
+  height: 30vh;
   font-size: 4rem;
   font-weight: bold;
   font-family: "Roboto", sans-serif;

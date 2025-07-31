@@ -25,6 +25,11 @@ export class ArticlesController {
     return this.articlesService.findAll();
   }
 
+  @Get('last')
+  findLast() {
+    return this.articlesService.findLast();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.articlesService.findOne(+id);

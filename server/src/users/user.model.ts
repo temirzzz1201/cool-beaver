@@ -5,27 +5,23 @@ import {
   DataType,
   PrimaryKey,
   AutoIncrement,
-  Unique,
+  Default,
 } from 'sequelize-typescript';
-import { CreationOptional } from 'sequelize';
 
 @Table({ tableName: 'users', timestamps: false })
-export class User extends Model<User, Partial<User>> {
+export class User extends Model<User> {
   @PrimaryKey
   @AutoIncrement
-  @Column(DataType.INTEGER)
-  declare id: CreationOptional<number>;
+  @Column
+  declare id: number;
 
-  @Column(DataType.STRING)
-  declare name: string;
-
-  @Unique
-  @Column(DataType.STRING)
+  @Column({ unique: true, allowNull: false })
   declare email: string;
 
-  @Column(DataType.STRING)
+  @Column({ allowNull: false })
   declare password: string;
 
-  @Column({ type: DataType.STRING, defaultValue: 'user' })
-  declare role: string;
+  @Default('user')
+  @Column(DataType.ENUM('user', 'admin'))
+  declare role: 'user' | 'admin';
 }

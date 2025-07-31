@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-center h-[70vh]">
     <form class="flex flex-col min-w-[320px]" @submit.prevent="onSubmit">
-      <h1 class="text-3xl mb-8">Регистрация</h1>
+      <h1 class="text-3xl mb-8">Войти</h1>
       <input
         class="border-b-2 mb-4 border-e-amber-500"
         v-model="email"
@@ -20,13 +20,13 @@
         class="flex justify-center items-center bg-blue-400 cursor-pointer text-white py-1 mb-2"
         type="submit"
       >
-        Регистрация
+        Войти
       </button>
       <p class="flex text-orange-800" v-if="error">{{ error }}</p>
       <p>
-        Уже есть аккаунт?
-        <NuxtLink class="text-cyan-300 underline pl-2" to="/login"
-          >Войти</NuxtLink
+        Нет аккаунта?
+        <NuxtLink class="text-cyan-300 underline pl-2" to="/register"
+          >Зарегестрироваться</NuxtLink
         >
       </p>
     </form>
@@ -41,14 +41,14 @@ const email = ref("");
 const password = ref("");
 const error = ref("");
 
-const { register } = useAuth();
+const { login } = useAuth();
 
 async function onSubmit() {
   error.value = "";
   try {
-    await register(email.value, password.value);
+    await login(email.value, password.value);
   } catch (e: any) {
-    error.value = e.message || "Registration error";
+    error.value = e.message || "Login error";
   }
 }
 </script>
