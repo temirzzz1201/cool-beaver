@@ -22,6 +22,12 @@ export class AuthService {
     return this.createToken(user);
   }
 
+  async loadUserData(email: string, password: string) {
+    const user = await this.usersService.validateUser(email, password);
+    if (!user) throw new UnauthorizedException('No such user');
+    return user;
+  }
+
   private createToken(user) {
     const payload = { sub: user.id, role: user.role };
     return {

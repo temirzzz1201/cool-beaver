@@ -5,7 +5,7 @@
     :to="`/articles/${article.id}`"
   >
     <article
-      class="flex flex-col mr-1.5 border rounded-sm border-cyan-50 radius bg-blue-50 shadow p-3"
+      class="flex flex-col mr-1.5 border rounded-sm border-cyan-50 radius bg-blue-50 shadow p-3 text-black dark:bg-gray-900 dark:text-white"
     >
       <h2 class="text-2xl">
         {{ article.title }}

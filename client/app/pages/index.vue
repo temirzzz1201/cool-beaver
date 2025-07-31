@@ -6,6 +6,13 @@
   <section class="mb-14">
     <app-articles-card v-if="lastArticle" :articles="[lastArticle]" />
   </section>
+  <section class="mb-14">
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum deleniti
+      sit commodi? Ipsam, quo eos. Quos animi aperiam sapiente, nostrum aut est
+      cumque sed qui quisquam quia repellat, ut temporibus.
+    </p>
+  </section>
 </template>
 
 <script setup lang="ts">

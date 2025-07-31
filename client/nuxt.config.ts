@@ -4,9 +4,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   pages: true,
   css: ["~/assets/styles/main.css", "leaflet/dist/leaflet.css"],
-
+  // ui: {
+  //   colorMode: false,
+  // },
   vite: {
     plugins: [tailwindcss()],
   },
-  modules: ["@nuxt/image", "nuxt-swiper", "@pinia/nuxt"],
+  modules: ["@nuxt/image", "nuxt-swiper", "@pinia/nuxt", "@nuxt/ui"],
 });

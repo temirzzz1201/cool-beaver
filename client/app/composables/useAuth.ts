@@ -1,14 +1,30 @@
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { type AuthUser } from "~/types";
 
-const token = ref<string | null>(
-  import.meta.client ? localStorage.getItem("token") : null
-);
-const user = ref<AuthUser | null>(null);
+const token = ref<string | null>(null);
+const user = ref<any>(null);
 
 export function useAuth() {
   const router = useRouter();
+
+  async function loadUser() {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      token.value = storedToken;
+
+      try {
+        const res = await fetch(`${mainUrl}/api/auth/profile`, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        });
+
+        if (!res.ok) throw new Error("Failed to load profile");
+        const data = await res.json();
+        user.value = data;
+      } catch (error) {
+        logout();
+      }
+    }
+  }
 
   async function login(email: string, password: string) {
     const res = await fetch(`${mainUrl}/api/auth/login`, {
@@ -18,8 +34,8 @@ export function useAuth() {
     });
 
     if (!res.ok) throw new Error("Login failed");
-    const data = await res.json();
 
+    const data = await res.json();
     token.value = data.access_token;
     user.value = data.user;
 
@@ -38,8 +54,8 @@ export function useAuth() {
     });
 
     if (!res.ok) throw new Error("Registration failed");
-    const data = await res.json();
 
+    const data = await res.json();
     token.value = data.access_token;
     user.value = data.user;
 
@@ -53,22 +69,16 @@ export function useAuth() {
   function logout() {
     token.value = null;
     user.value = null;
-    if (import.meta.client) {
-      localStorage.removeItem("token");
-    }
+    localStorage.removeItem("token");
     router.push("/login");
   }
 
-  function isAdmin(): boolean {
+  function isAdmin() {
     return user.value?.role === "admin";
   }
 
-  return {
-    token,
-    user,
-    login,
-    register,
-    logout,
-    isAdmin,
-  };
+  // Загружаем пользователя при старте
+  onMounted(loadUser);
+
+  return { token, user, login, register, logout, isAdmin, loadUser };
 }
