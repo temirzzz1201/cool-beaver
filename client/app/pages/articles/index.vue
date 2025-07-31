@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-3xl mb-8">Articles</h1>
+  <h1 class="text-3xl mb-8">Статьи</h1>
   <section class="flex mt-3">
     <app-articles-card :articles="articles" />
   </section>

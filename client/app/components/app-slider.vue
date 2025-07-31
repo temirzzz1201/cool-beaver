@@ -4,7 +4,7 @@
       <swiper-slide
         v-for="(slide, idx) in slides"
         :key="idx"
-        style="background-color: rgb(32, 233, 70); color: white"
+        class="flex bg-green-700 text-white"
       >
         Slide {{ idx + 1 }}
       </swiper-slide>
@@ -15,23 +15,28 @@
 <script setup lang="ts">
 const containerRef = ref(null);
 const slides = ref(Array.from({ length: 10 }));
-const swiper = useSwiper(containerRef, {
-  effect: "creative",
-  loop: true,
-  autoplay: {
-    delay: 5000,
-  },
-  creativeEffect: {
-    prev: {
-      shadow: true,
-      translate: [0, 0, -100],
+
+const startSwiper = () => {
+  const swiper = useSwiper(containerRef, {
+    effect: "creative",
+    loop: true,
+    autoplay: {
+      delay: 5000,
     },
-    next: {
-      shadow: true,
-      translate: [0, 0, -100],
+    creativeEffect: {
+      prev: {
+        shadow: true,
+        translate: [0, 0, -100],
+      },
+      next: {
+        shadow: true,
+        translate: [0, 0, -100],
+      },
     },
-  },
-});
+  });
+};
+
+startSwiper();
 </script>
 
 <style lang="css">
