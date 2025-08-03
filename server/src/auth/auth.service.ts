@@ -9,10 +9,10 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async register(email: string, password: string) {
+  async register(name: string, email: string, password: string) {
     const existing = await this.usersService.findByEmail(email);
     if (existing) throw new Error('User already exists');
-    const user = await this.usersService.create({ email, password });
+    const user = await this.usersService.create({ name, email, password });
     return this.createToken(user);
   }
 
@@ -20,12 +20,6 @@ export class AuthService {
     const user = await this.usersService.validateUser(email, password);
     if (!user) throw new UnauthorizedException('Invalid credentials');
     return this.createToken(user);
-  }
-
-  async loadUserData(email: string, password: string) {
-    const user = await this.usersService.validateUser(email, password);
-    if (!user) throw new UnauthorizedException('No such user');
-    return user;
   }
 
   private createToken(user) {

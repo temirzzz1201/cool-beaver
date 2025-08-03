@@ -15,6 +15,11 @@ export class User extends Model<User> {
   @Column
   declare id: number;
 
+  @Column({
+    allowNull: false,
+  })
+  declare name: string;
+
   @Column({ unique: true, allowNull: false })
   declare email: string;
 

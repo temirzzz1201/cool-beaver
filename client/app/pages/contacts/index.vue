@@ -1,17 +1,8 @@
 <template>
   <section class="px-4 py-8 max-w-3xl mx-auto">
-    <header class="mb-6">
-      <h1 class="text-3xl font-bold dark:bg-gray-900 dark:text-white">
-        Контакты
-      </h1>
-      <p class="mt-2 dark:bg-gray-900 dark:text-white">
-        Свяжитесь с нами, если вам нужна помощь, вы хотите стать волонтёром или
-        поддержать наш проект.
-      </p>
-    </header>
-
     <div class="space-y-6">
       <section class="mb-14">
+        <h1 class="mb-6 font-medium text-3xl">Мы на карте</h1>
         <ClientOnly>
           <app-map />
         </ClientOnly>

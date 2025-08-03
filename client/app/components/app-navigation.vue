@@ -3,8 +3,8 @@
     class="w-full max-w-[1920px] flex justify-between px-3 py-4 mr-auto ml-auto"
   >
     <nuxt-link class="flex items-center" to="/">
-      <nuxt-img class="rounded" height="50" src="/logo1.png" />
-      <p class="text-white pl-2">Десница добра</p>
+      <nuxt-img class="rounded" height="50" src="/logo.png" />
+      <p class="text-white font-semibold pl-2">Десница добра</p>
     </nuxt-link>
 
     <ul class="hidden md:flex items-center">
@@ -16,22 +16,27 @@
           index !== store.navLinks.length - 1 ? 'mr-5' : 'mr-0',
         ]"
       >
-        <nuxt-link :to="link.link" class="text-white">
+        <u-link
+          :to="link.link"
+          class="text-lg text-white dark:bg-gray-900 dark:text-white"
+          active-class="font-bold"
+          inactive-class="text-muted"
+        >
           {{ link.title }}
-        </nuxt-link>
+        </u-link>
       </li>
-      <ClientOnly v-if="!colorMode?.forced">
-        <UButton
+      <client-only v-if="!colorMode?.forced">
+        <u-button
           class="ml-4"
           :icon="isDark ? 'i-lucide-moon' : 'i-lucide-sun'"
           color="neutral"
           variant="ghost"
           @click="isDark = !isDark"
         />
-      </ClientOnly>
+      </client-only>
     </ul>
 
-    <UDrawer
+    <u-drawer
       v-model:open="open"
       title="Drawer with description"
       description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -71,7 +76,6 @@
           </svg>
         </button>
       </div>
-
       <template #body>
         <ul class="flex flex-col">
           <li
@@ -79,24 +83,26 @@
             v-for="(link, index) in store.navLinks"
             :key="link.id"
           >
-            <nuxt-link
+            <u-link
               :to="link.link"
               class="text-black dark:bg-gray-900 dark:text-white"
+              active-class="font-bold"
+              inactive-class="text-muted"
             >
               {{ link.title }}
-            </nuxt-link>
+            </u-link>
           </li>
-          <ClientOnly v-if="!colorMode?.forced">
-            <UButton
+          <client-only v-if="!colorMode?.forced">
+            <u-button
               :icon="isDark ? 'i-lucide-moon' : 'i-lucide-sun'"
               color="neutral"
               variant="ghost"
               @click="isDark = !isDark"
             />
-          </ClientOnly>
+          </client-only>
         </ul>
       </template>
-    </UDrawer>
+    </u-drawer>
   </nav>
 </template>
 

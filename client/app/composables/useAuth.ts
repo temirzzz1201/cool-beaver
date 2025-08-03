@@ -1,4 +1,4 @@
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 const token = ref<string | null>(null);
@@ -7,69 +7,98 @@ const user = ref<any>(null);
 export function useAuth() {
   const router = useRouter();
 
-  async function loadUser() {
-    const storedToken = localStorage.getItem("token");
-    if (storedToken) {
-      token.value = storedToken;
+  if (import.meta.client && !token.value) {
+    token.value = localStorage.getItem("token");
+  }
 
-      try {
-        const res = await fetch(`${mainUrl}/api/auth/profile`, {
-          headers: { Authorization: `Bearer ${storedToken}` },
-        });
-
-        if (!res.ok) throw new Error("Failed to load profile");
-        const data = await res.json();
-        user.value = data;
-      } catch (error) {
-        logout();
-      }
+  function redirectAfterAuth() {
+    if (user.value?.role === "admin") {
+      router.push("/admin");
+    } else {
+      router.push("/profile");
     }
   }
 
   async function login(email: string, password: string) {
-    const res = await fetch(`${mainUrl}/api/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch(`${mainUrl}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (!res.ok) throw new Error("Login failed");
+      if (!res.ok) throw new Error("Login failed");
 
-    const data = await res.json();
-    token.value = data.access_token;
-    user.value = data.user;
+      const data = await res.json();
+      token.value = data.access_token;
+      user.value = data.user;
 
-    if (import.meta.client && token.value) {
-      localStorage.setItem("token", token.value);
+      if (import.meta.client) {
+        localStorage.setItem("token", token.value ?? "");
+      }
+
+      redirectAfterAuth();
+    } catch (error) {
+      console.error(error);
+      throw new Error("Login error");
     }
-
-    router.push("/admin");
   }
 
-  async function register(email: string, password: string) {
-    const res = await fetch(`${mainUrl}/api/auth/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+  async function register(name: string, email: string, password: string) {
+    try {
+      const res = await fetch(`${mainUrl}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
 
-    if (!res.ok) throw new Error("Registration failed");
+      if (!res.ok) throw new Error("Registration failed");
 
-    const data = await res.json();
-    token.value = data.access_token;
-    user.value = data.user;
+      const data = await res.json();
+      token.value = data.access_token;
+      user.value = data.user;
 
-    if (import.meta.client && token.value) {
-      localStorage.setItem("token", token.value);
+      if (import.meta.client) {
+        localStorage.setItem("token", token.value ?? "");
+      }
+
+      redirectAfterAuth();
+    } catch (error) {
+      console.error(error);
+      throw new Error("Register error");
     }
+  }
 
-    router.push("/admin");
+  async function fetchUser() {
+    if (!import.meta.client) return;
+
+    const storedToken = localStorage.getItem("token");
+    if (!storedToken) return;
+
+    try {
+      const res = await fetch(`${mainUrl}/api/auth/me`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      });
+
+      if (!res.ok) throw new Error("Unauthorized");
+
+      const data = await res.json();
+      user.value = data;
+      token.value = storedToken;
+    } catch (e) {
+      console.error("Failed to fetch user");
+      logout();
+    }
   }
 
   function logout() {
     token.value = null;
     user.value = null;
-    localStorage.removeItem("token");
+
+    if (import.meta.client) {
+      localStorage.removeItem("token");
+    }
+
     router.push("/login");
   }
 
@@ -77,8 +106,13 @@ export function useAuth() {
     return user.value?.role === "admin";
   }
 
-  // Загружаем пользователя при старте
-  onMounted(loadUser);
-
-  return { token, user, login, register, logout, isAdmin, loadUser };
+  return {
+    token,
+    user,
+    login,
+    register,
+    logout,
+    fetchUser,
+    isAdmin,
+  };
 }

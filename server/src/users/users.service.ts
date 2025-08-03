@@ -16,16 +16,14 @@ export class UsersService {
   }
 
   async create(dto: CreateUserDto): Promise<User> {
-    const { email, password } = dto;
+    const { name, email, password } = dto;
     const existingAdmin = await this.userModel.findOne({
       where: { role: 'admin' },
     });
     const role = existingAdmin ? 'user' : 'admin';
     const hash = await bcrypt.hash(password, 10);
-    console.log('email, password ', email, password);
-    console.log('existingAdmin ', existingAdmin);
 
-    return this.userModel.create({ email, password: hash, role } as any);
+    return this.userModel.create({ name, email, password: hash, role } as any);
   }
 
   async validateUser(email: string, password: string) {

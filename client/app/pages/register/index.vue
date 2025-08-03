@@ -1,54 +1,75 @@
 <template>
   <div class="flex items-center justify-center h-[70vh]">
-    <form class="flex flex-col min-w-[320px]" @submit.prevent="onSubmit">
+    <UForm
+      :schema="schema"
+      :state="state"
+      class="space-y-4"
+      @submit.prevent="onSubmit"
+    >
       <h1 class="text-3xl mb-8">Регистрация</h1>
-      <input
-        class="border-b-2 mb-4 border-e-amber-500"
-        v-model="email"
-        type="email"
-        placeholder="Email"
-        required
-      />
-      <input
-        class="border-b-2 mb-6 border-e-amber-500"
-        v-model="password"
-        type="password"
-        placeholder="Password"
-        required
-      />
-      <button
-        class="flex justify-center items-center bg-blue-400 cursor-pointer text-white py-1 mb-2"
-        type="submit"
-      >
-        Регистрация
-      </button>
-      <p class="flex text-orange-800" v-if="error">{{ error }}</p>
+      <UFormField label="Имя" name="name">
+        <UInput v-model="state.name" />
+      </UFormField>
+      <UFormField label="Почта" name="email">
+        <UInput v-model="state.email" />
+      </UFormField>
+
+      <UFormField label="Пароль" name="password">
+        <UInput v-model="state.password" type="password" />
+      </UFormField>
+
+      <UButton type="submit"> Регистрация </UButton>
       <p>
-        Уже есть аккаунт?
-        <NuxtLink class="text-cyan-300 underline pl-2" to="/login"
-          >Войти</NuxtLink
-        >
+        Нет аккаунта?
+        <client-only>
+          <NuxtLink class="text-cyan-300 underline pl-2" to="/login"
+            >Войти</NuxtLink
+          >
+        </client-only>
       </p>
-    </form>
+    </UForm>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import * as v from "valibot";
+import type { FormSubmitEvent } from "@nuxt/ui";
 import { useAuth } from "~/composables/useAuth";
 
-const email = ref("");
-const password = ref("");
-const error = ref("");
+const schema = v.object({
+  name: v.pipe(v.string(), v.minLength(4, "Минимум 4 символа")),
+  email: v.pipe(v.string(), v.email("Неверный email")),
+  password: v.pipe(v.string(), v.minLength(8, "Минимум 8 символов")),
+});
 
 const { register } = useAuth();
 
-async function onSubmit() {
-  error.value = "";
+type Schema = v.InferOutput<typeof schema>;
+
+const state = reactive({
+  name: "",
+  email: "",
+  password: "",
+});
+
+const toast = useToast();
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   try {
-    await register(email.value, password.value);
+    await register(event.data.name, event.data.email, event.data.password);
+    if (event.data.email.length) {
+      toast.add({
+        title: "Отлично",
+        description: `Вы успешно зарегестрировались - ${event.data.email}`,
+        color: "success",
+      });
+    }
   } catch (e: any) {
-    error.value = e.message || "Registration error";
+    toast.add({
+      title: "Ошибка",
+      description: `Ошибка регистрации`,
+      color: "success",
+    });
+    throw new Error(e.message) || "Registr error";
   }
 }
 </script>

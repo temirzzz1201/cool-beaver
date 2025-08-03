@@ -25,8 +25,8 @@ export const useMainStore = defineStore("mainStore", () => {
     },
   ]);
   const contactsMapPoints = ref([
-    { lat: 55.751244, lng: 37.618423, name: "Москва" },
-    { lat: 59.9342802, lng: 30.3350986, name: "Санкт-Петербург" },
+    { lat: 45.025661, lng: 39.100718, name: "Пашковка" },
+    { lat: 45.034413, lng: 38.971855, name: "Рашпилевская" },
   ]);
 
   return {

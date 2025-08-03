@@ -1,1 +1,0 @@
-<template>личный кабинет</template>
