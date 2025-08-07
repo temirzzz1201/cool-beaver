@@ -29,4 +29,11 @@ export class User extends Model<User> {
   @Default('user')
   @Column(DataType.ENUM('user', 'admin'))
   declare role: 'user' | 'admin';
+
+  @Column({
+    type: DataType.DATE,
+    allowNull: false,
+    defaultValue: DataType.NOW,
+  })
+  declare creationDate: Date;
 }

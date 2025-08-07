@@ -1,6 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { Sequelize } from 'sequelize-typescript';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { mainClientUrl } from './common/constants';
 
@@ -25,9 +26,11 @@ async function bootstrap() {
     .setVersion('1.0')
     .addBearerAuth()
     .build();
+  const sequelize = app.get(Sequelize);
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+  await sequelize.sync({ alter: false });
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

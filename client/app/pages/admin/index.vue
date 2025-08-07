@@ -11,6 +11,9 @@
         Access denied. Please <NuxtLink to="/login">login</NuxtLink> as admin.
       </p>
     </div>
+    <div>
+      <app-chart />
+    </div>
   </client-only>
 </template>
 

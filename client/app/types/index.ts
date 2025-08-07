@@ -17,3 +17,11 @@ export interface AuthUser {
   email: string;
   role: "user" | "admin";
 }
+
+export interface Users {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  creationDate: string;
+}

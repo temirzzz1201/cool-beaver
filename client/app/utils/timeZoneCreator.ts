@@ -16,3 +16,23 @@ export const timeCreator = (rowTime: string): string => {
 
   return `${formattedDate}, ${formattedTime}`;
 };
+
+export const getRussianMonthName = (dateString: string): string => {
+  const months = [
+    "январь",
+    "февраль",
+    "март",
+    "апрель",
+    "май",
+    "июнь",
+    "июль",
+    "август",
+    "сентябрь",
+    "октябрь",
+    "ноябрь",
+    "декабрь",
+  ];
+
+  const date = new Date(dateString);
+  return months[date.getMonth()] ?? "неизвестно";
+};
