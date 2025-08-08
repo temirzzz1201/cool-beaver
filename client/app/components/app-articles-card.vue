@@ -9,17 +9,14 @@
     >
       <UCard>
         <template #header>
-          <!-- <Placeholder class="h-4" /> -->
           <h2 class="text-2xl">
             {{ article.title }}
           </h2>
         </template>
 
-        <!-- <Placeholder class="h-32" /> -->
         <p>{{ article.content }}</p>
 
         <template #footer>
-          <!-- <Placeholder class="h-8" /> -->
           <small v-if="article?.createdAt">{{
             timeCreator(article.createdAt)
           }}</small>

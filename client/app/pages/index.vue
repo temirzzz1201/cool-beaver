@@ -33,6 +33,6 @@
 import { type Article } from "~/types";
 
 const { data: lastArticle } = await useAsyncData<Article>("last-article", () =>
-  $fetch(`${mainUrl}/articles/last`)
+  $fetch(`${mainUrl}/api/articles/last`)
 );
 </script>

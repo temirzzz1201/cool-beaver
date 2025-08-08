@@ -93,14 +93,8 @@ const getChartData = async () => {
 
     chartData.value.labels = Array.from(monthMap.keys());
     chartData.value.datasets[0].data = Array.from(monthMap.values());
-
-    console.log("chartData.value.labels ", chartData.value.labels);
-    console.log(
-      "chartData.value.datasets[0].data ",
-      chartData.value.datasets[0].data
-    );
   } catch (error) {
-    console.error("Ошибка при получении данных пользователей:", error);
+    throw new Error(`Ошибка при получении данных пользователей: ${error}`);
   } finally {
     isLoading.value = false;
   }

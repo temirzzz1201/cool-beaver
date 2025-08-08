@@ -1,19 +1,29 @@
 <template>
   <client-only>
-    <div v-if="authorized">
-      <h1>Admin Panel</h1>
-      <p>Welcome, {{ user?.email }}</p>
-      <u-button @click="logout">Logout</u-button>
-    </div>
+    <section class="flex" v-if="authorized">
+      <div>
+        <h1 class="text-2xl mb-2">Панель администратора</h1>
+        <p class="mb-4">
+          Привет,
+          <span
+            :class="{ 'text-orange-600': user.role === 'admin' }"
+            class="text-3xl text-emerald-500"
+            >{{ user?.name }}</span
+          >
+        </p>
+      </div>
+      <u-button class="ml-6 h-[36px]" @click="logout">Выйти</u-button>
+    </section>
 
-    <div v-else>
+    <section v-else>
       <p>
-        Access denied. Please <NuxtLink to="/login">login</NuxtLink> as admin.
+        Доступ запрещен, войдите <NuxtLink to="/login">login</NuxtLink> как
+        админ.
       </p>
-    </div>
-    <div>
-      <app-chart />
-    </div>
+    </section>
+    <section>
+      <app-tabs />
+    </section>
   </client-only>
 </template>
 

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { type NavLinks } from "~/types";
+import { type NavLinks, type Users } from "~/types";
 
 export const useMainStore = defineStore("mainStore", () => {
   const navLinks = ref<NavLinks[]>([

@@ -39,7 +39,6 @@ export function useAuth() {
 
       redirectAfterAuth();
     } catch (error) {
-      console.error(error);
       throw new Error("Login error");
     }
   }
@@ -64,7 +63,6 @@ export function useAuth() {
 
       redirectAfterAuth();
     } catch (error) {
-      console.error(error);
       throw new Error("Register error");
     }
   }
@@ -84,10 +82,11 @@ export function useAuth() {
 
       const data = await res.json();
       user.value = data;
+
       token.value = storedToken;
     } catch (e) {
-      console.error("Failed to fetch user");
       logout();
+      throw new Error("Failed to fetch user");
     }
   }
 

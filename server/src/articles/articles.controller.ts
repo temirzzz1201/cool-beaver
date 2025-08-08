@@ -11,11 +11,11 @@ import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
 
-@Controller('articles')
+@Controller('api/articles')
 export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
 
-  @Post()
+  @Post('create')
   create(@Body() dto: CreateArticleDto) {
     return this.articlesService.create(dto);
   }

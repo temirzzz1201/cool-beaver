@@ -50,6 +50,6 @@
 
 <script setup lang="ts">
 definePageMeta({
-  prerender: true, // Страница будет предрендерена во время билда (SSG)
+  prerender: true,
 });
 </script>

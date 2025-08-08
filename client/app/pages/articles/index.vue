@@ -12,7 +12,11 @@ const {
   data: articles,
   status,
   error,
-} = useAsyncData<Article[]>("articles", () => $fetch(`${mainUrl}/articles`), {
-  default: () => [],
-});
+} = useAsyncData<Article[]>(
+  "articles",
+  () => $fetch(`${mainUrl}/api/articles`),
+  {
+    default: () => [],
+  }
+);
 </script>
