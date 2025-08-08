@@ -9,7 +9,7 @@ const items = [
     icon: "i-lucide-file-text",
   },
   {
-    label: "Обновить статью",
+    label: "Обновить/Удалить статью",
     icon: "i-lucide-file-text",
   },
 ];
@@ -28,7 +28,7 @@ const items = [
         <div v-else-if="item.label === 'Создать статью'">
           <app-article-creator />
         </div>
-        <div v-else-if="item.label === 'Обновить статью'">
+        <div v-else-if="item.label === 'Обновить/Удалить статью'">
           <app-article-updater />
         </div>
       </section>

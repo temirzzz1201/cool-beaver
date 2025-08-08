@@ -35,12 +35,12 @@ export class ArticlesController {
     return this.articlesService.findOne(+id);
   }
 
-  @Put(':id')
+  @Put('update/:id')
   update(@Param('id') id: string, @Body() dto: UpdateArticleDto) {
     return this.articlesService.update(+id, dto);
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   remove(@Param('id') id: string) {
     return this.articlesService.remove(+id);
   }

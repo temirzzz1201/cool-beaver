@@ -1,18 +1,21 @@
 <template>
   <client-only>
-    <section class="flex" v-if="authorized">
-      <div>
-        <h1 class="text-2xl mb-2">Панель администратора</h1>
-        <p class="mb-4">
-          Привет,
-          <span
-            :class="{ 'text-orange-600': user.role === 'admin' }"
-            class="text-3xl text-emerald-500"
-            >{{ user?.name }}</span
-          >
-        </p>
+    <section v-if="authorized">
+      <div class="flex mb-10">
+        <div>
+          <h1 class="text-2xl mb-2">Панель администратора</h1>
+          <p class="mb-4">
+            Привет,
+            <span
+              :class="{ 'text-orange-600': user.role === 'admin' }"
+              class="text-3xl text-emerald-500"
+              >{{ user?.name }}</span
+            >
+          </p>
+        </div>
+        <u-button class="ml-6 h-[36px]" @click="logout">Выйти</u-button>
       </div>
-      <u-button class="ml-6 h-[36px]" @click="logout">Выйти</u-button>
+      <u-separator class="mb-10" />
     </section>
 
     <section v-else>

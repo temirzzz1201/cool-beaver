@@ -54,14 +54,18 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         content: event.data.content,
       }),
     });
+    toast.add({
+      title: "Success",
+      description: "Статья быда успешно создана",
+      color: "success",
+    });
   } catch (error) {
+    toast.add({
+      title: "Success",
+      description: "Ошибка создания статьи",
+      color: "success",
+    });
     throw new Error(`Ошибка создания статьи: ${error}`);
   }
-  toast.add({
-    title: "Success",
-    description: "The form has been submitted.",
-    color: "success",
-  });
-  console.log(event.data);
 }
 </script>
