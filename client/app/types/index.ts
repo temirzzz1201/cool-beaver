@@ -25,3 +25,26 @@ export interface Users {
   password?: string;
   creationDate: string;
 }
+
+export interface TabsItems {
+  label: TabLabel;
+  icon: string;
+}
+
+export enum TabLabel {
+  Chart = "График",
+  Create = "Создать статью",
+  Update = "Обновить/Удалить статью",
+}
+
+export interface MapPoints {
+  lat: number;
+  lng: number;
+  name: string;
+}
+
+export interface AppFeature {
+  icon: string;
+  title: string;
+  text: string;
+}

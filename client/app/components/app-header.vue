@@ -1,22 +1,37 @@
 <template>
-  <header
-    class="w-full bg-blue-400 text-black dark:bg-gray-900 dark:border-b dark:border-b-white dark:text-white"
+  <transition
+    enter-active-class="transition-transform duration-500"
+    enter-from-class="-translate-y-20 opacity-0"
+    enter-to-class="translate-y-0 opacity-100"
+    leave-active-class="transition-transform duration-500"
+    leave-from-class="translate-y-0 opacity-100"
+    leave-to-class="-translate-y-20 opacity-0"
   >
-    <slot></slot>
-    <u-separator />
-    <div
-      class="w-full bg-blue-400 text-black dark:bg-gray-900 dark:border-b dark:border-b-white dark:text-whitew-full max-w-[1920px] px-3 py-1 mr-auto ml-auto"
+    <header
+      v-show="visible"
+      class="fixed top-0 left-0 w-full z-50 bg-blue-200 dark:bg-gray-900 text-gray-600 backdrop-blur-sm shadow-md"
     >
-      <div class="flex justify-end">
-        <a
-          class="text-white font-semibold underline mr-5"
-          href="mailto:name@email.com"
-          >написать: name@email.com</a
-        >
-        <a class="text-white font-semibold" href="tel:+7 900 00 00"
-          >позвонить: 8 900 00 00</a
-        >
-      </div>
-    </div>
-  </header>
+      <slot></slot>
+    </header>
+  </transition>
 </template>
+
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from "vue";
+
+const visible = ref(true);
+let lastScroll = 0;
+
+const handleScroll = () => {
+  const current = window.scrollY;
+  if (current <= 0) {
+    visible.value = true;
+  } else {
+    visible.value = current < lastScroll;
+  }
+  lastScroll = current;
+};
+
+onMounted(() => window.addEventListener("scroll", handleScroll));
+onUnmounted(() => window.removeEventListener("scroll", handleScroll));
+</script>

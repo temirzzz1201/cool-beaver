@@ -1,5 +1,5 @@
 <template>
-  <section class="px-4 py-8 max-w-3xl mx-auto">
+  <section class="px-4 py-8 max-w-3xl mx-auto mt-34">
     <div class="space-y-6">
       <section class="mb-14">
         <h1 class="mb-6 font-medium text-3xl">Мы на карте</h1>
@@ -40,11 +40,11 @@
       </section>
     </div>
 
-    <footer
-      class="mt-10 border-t pt-6 dark:bg-gray-900 dark:text-white text-sm"
+    <section
+      class="mt-10 border-t pt-6 dark:bg-gray-900 dark:text-white text-sm mb-24"
     >
       Мы открыты к диалогу и сотрудничеству. Спасибо за вашу поддержку!
-    </footer>
+    </section>
   </section>
 </template>
 

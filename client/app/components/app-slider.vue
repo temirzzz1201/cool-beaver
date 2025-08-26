@@ -1,12 +1,8 @@
 <template>
   <client-only>
     <swiper-container ref="containerRef" :init="false">
-      <swiper-slide
-        v-for="(slide, idx) in slides"
-        :key="idx"
-        class="flex bg-green-700 text-white"
-      >
-        Slide {{ idx + 1 }}
+      <swiper-slide v-for="(slide, idx) in slides" :key="idx">
+        <nuxt-img :src="slide" :alt="slide" />
       </swiper-slide>
     </swiper-container>
   </client-only>
@@ -14,7 +10,9 @@
 
 <script setup lang="ts">
 const containerRef = ref(null);
-const slides = ref(Array.from({ length: 10 }));
+const slides = ref(
+  Array.from({ length: 6 }, (_, i) => `/slider/worker${i + 1}.jpg`)
+);
 
 const startSwiper = () => {
   const swiper = useSwiper(containerRef, {
@@ -44,10 +42,25 @@ swiper-slide {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
-  height: 30vh;
-  font-size: 4rem;
-  font-weight: bold;
-  font-family: "Roboto", sans-serif;
+  overflow: hidden;
+  height: 50vh;
+}
+
+swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1280px) {
+  swiper-slide {
+    height: 540px;
+  }
+}
+
+@media (max-width: 768px) {
+  swiper-slide {
+    height: 320px;
+  }
 }
 </style>

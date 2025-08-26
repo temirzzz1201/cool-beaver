@@ -3,23 +3,29 @@
     v-for="article in props?.articles"
     :key="article.id"
     :to="`/articles/${article.id}`"
+    class="h-full"
   >
     <article
-      class="flex flex-col mr-1.5 border rounded-sm border-cyan-50 radius bg-blue-50 shadow p-3 text-black dark:bg-gray-900 dark:text-white"
+      class="flex flex-col h-full rounded-lg bg-blue-50 shadow p-3 text-black dark:bg-gray-900 dark:text-white"
     >
-      <UCard>
+      <UCard class="flex flex-col h-full">
         <template #header>
-          <h2 class="text-2xl">
+          <h2 class="text-xl font-semibold line-clamp-2">
             {{ article.title }}
           </h2>
         </template>
 
-        <p>{{ article.content }}</p>
+        <p class="flex-1 line-clamp-3">
+          {{ article.content }}
+        </p>
 
         <template #footer>
-          <small v-if="article?.createdAt">{{
-            timeCreator(article.createdAt)
-          }}</small>
+          <small
+            v-if="article?.createdAt"
+            class="text-gray-500 dark:text-gray-400"
+          >
+            {{ timeCreator(article.createdAt) }}
+          </small>
         </template>
       </UCard>
     </article>

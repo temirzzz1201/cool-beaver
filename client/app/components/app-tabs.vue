@@ -1,34 +1,26 @@
 <script setup lang="ts">
-const items = [
-  {
-    label: "График",
-    icon: "i-lucide-bar-chart",
-  },
-  {
-    label: "Создать статью",
-    icon: "i-lucide-file-text",
-  },
-  {
-    label: "Обновить/Удалить статью",
-    icon: "i-lucide-file-text",
-  },
-];
+import { TabLabel } from "~/types";
+import { useMainStore } from "#imports";
+import { storeToRefs } from "#imports";
+const store = useMainStore();
+
+const { tabsItems } = storeToRefs(store);
 </script>
 
 <template>
   <UTabs
     orientation="vertical"
     variant="link"
-    :items="items"
+    :items="tabsItems"
     class="w-full h-[400px] text-white"
   >
     <template #content="{ item }">
       <section class="p-4">
-        <app-chart v-if="item.label === 'График'" />
-        <div v-else-if="item.label === 'Создать статью'">
+        <app-chart v-if="item.label === TabLabel.Chart" />
+        <div v-else-if="item.label === TabLabel.Create">
           <app-article-creator />
         </div>
-        <div v-else-if="item.label === 'Обновить/Удалить статью'">
+        <div v-else-if="item.label === TabLabel.Update">
           <app-article-updater />
         </div>
       </section>

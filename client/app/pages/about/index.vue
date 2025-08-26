@@ -1,5 +1,7 @@
 <template>
-  <section class="px-4 py-8 max-w-3xl mx-auto dark:bg-gray-900 dark:text-white">
+  <section
+    class="px-4 py-8 max-w-3xl mx-auto dark:bg-gray-900 dark:text-white mt-34"
+  >
     <header class="mb-6">
       <h1 class="text-3xl font-bold dark:bg-gray-900 dark:text-white">О нас</h1>
       <p class="mt-2 dark:bg-gray-900 dark:text-white">
@@ -43,7 +45,7 @@
     </div>
 
     <footer
-      class="mt-10 border-t pt-6 dark:bg-gray-900 dark:text-white text-sm"
+      class="mt-10 border-t pt-6 dark:bg-gray-900 dark:text-white text-sm mb-24"
     >
       Если вы нуждаетесь в помощи или хотите стать волонтёром — свяжитесь с
       нами. Вместе мы можем больше.

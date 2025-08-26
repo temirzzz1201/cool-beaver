@@ -2,10 +2,7 @@
   <nav
     class="w-full max-w-[1920px] flex justify-between px-3 py-4 mr-auto ml-auto"
   >
-    <nuxt-link class="flex items-center" to="/">
-      <nuxt-img class="rounded" height="50" src="/logo.png" />
-      <p class="text-white font-semibold pl-2">Десница добра</p>
-    </nuxt-link>
+    <app-logo />
 
     <ul class="hidden md:flex items-center">
       <li
@@ -18,7 +15,7 @@
       >
         <u-link
           :to="link.link"
-          class="text-lg text-white dark:bg-gray-900 dark:text-white"
+          class="text-lg text-gray-600 dark:bg-gray-900 dark:text-white"
           active-class="font-bold"
           inactive-class="text-muted"
         >
@@ -29,7 +26,7 @@
         <u-button
           class="ml-4"
           :icon="isDark ? 'i-lucide-moon' : 'i-lucide-sun'"
-          color="neutral"
+          color="secondary"
           variant="ghost"
           @click="isDark = !isDark"
         />

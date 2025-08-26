@@ -13,7 +13,7 @@ onMounted(() => {
   const map = L.map("map").setView([45.039808, 38.976454], 11);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "Tmzzz",
+    attribution: "",
   }).addTo(map);
 
   store.contactsMapPoints.forEach((point) => {
