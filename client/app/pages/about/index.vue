@@ -1,6 +1,6 @@
 <template>
   <section
-    class="px-4 py-8 max-w-3xl mx-auto dark:bg-gray-900 dark:text-white mt-34"
+    class="px-4 py-8 max-w-[1920px] mx-auto dark:bg-gray-900 dark:text-white mt-24 max-[768px]:mt-20"
   >
     <header class="mb-6">
       <h1 class="text-3xl font-bold dark:bg-gray-900 dark:text-white">О нас</h1>

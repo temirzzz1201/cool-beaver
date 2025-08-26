@@ -1,15 +1,9 @@
 <template>
-  <section class="mb-14 mt-34 text-center">
-    <h1 class="text-4xl font-bold mb-4">Tasko</h1>
-    <p class="text-lg mb-8 text-gray-600 dark:text-gray-300">
-      Надёжные разнорабочие для любых задач&nbsp;&mdash; быстро, честно,
-      с&nbsp;гарантией качества
-    </p>
+  <section class="mb-14 mt-30 max-[768px]:mt-20">
     <app-slider />
   </section>
 
-  <!-- Услуги -->
-  <section class="mb-14 max-w-5xl mx-auto text-center">
+  <section class="mb-14 max-w-[1920px] mx-auto text-left">
     <h2 class="text-2xl font-semibold mb-8">Наши услуги</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <AppFeatureCard
@@ -22,7 +16,12 @@
     </div>
   </section>
 
-  <section class="mb-14 max-w-4xl mx-auto text-center">
+  <section class="mb-14">
+    <h2 class="text-2xl font-semibold mb-6 text-left">Полезные материалы</h2>
+    <app-articles-card v-if="lastArticle" :articles="[lastArticle]" />
+  </section>
+
+  <section class="mb-14 max-w-[1920px] mx-auto text-left">
     <h2 class="text-2xl font-semibold mb-6">Почему выбирают нас</h2>
     <div class="grid sm:grid-cols-2 gap-6">
       <AppFeatureCard
@@ -33,11 +32,6 @@
         :text="benefits.text"
       />
     </div>
-  </section>
-
-  <section class="mb-14">
-    <h2 class="text-2xl font-semibold mb-6 text-center">Полезные материалы</h2>
-    <app-articles-card v-if="lastArticle" :articles="[lastArticle]" />
   </section>
 
   <section

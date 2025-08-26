@@ -1,5 +1,5 @@
 <template>
-  <section class="mt-34 mb-24">
+  <section class="mt-30 max-[768px]:mt-20 mb-24">
     <article v-if="article" class="prose max-w-none">
       <header>
         <h1>{{ article.title }}</h1>

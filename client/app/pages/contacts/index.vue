@@ -1,5 +1,5 @@
 <template>
-  <section class="px-4 py-8 max-w-3xl mx-auto mt-34">
+  <section class="px-4 py-8 max-w-[1920px] mx-auto mt-24 max-[768px]:mt-20">
     <div class="space-y-6">
       <section class="mb-14">
         <h1 class="mb-6 font-medium text-3xl">Мы на карте</h1>

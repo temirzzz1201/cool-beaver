@@ -1,6 +1,6 @@
 <template>
   <client-only>
-    <section v-if="authorized" class="mt-34">
+    <section v-if="authorized" class="mt-30 max-[768px]:mt-20">
       <div class="flex mb-10">
         <div>
           <h1 class="text-2xl mb-2">Панель администратора</h1>

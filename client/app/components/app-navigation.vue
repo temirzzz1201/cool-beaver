@@ -26,19 +26,14 @@
         <u-button
           class="ml-4"
           :icon="isDark ? 'i-lucide-moon' : 'i-lucide-sun'"
-          color="secondary"
+          color="neutral"
           variant="ghost"
           @click="isDark = !isDark"
         />
       </client-only>
     </ul>
 
-    <u-drawer
-      v-model:open="open"
-      title="Drawer with description"
-      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-      direction="left"
-    >
+    <u-drawer v-model:open="open" title="Tasko" direction="left">
       <div class="md:hidden flex items-center">
         <button class="text-white focus:outline-none">
           <svg

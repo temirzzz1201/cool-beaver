@@ -9,11 +9,9 @@
       class="flex flex-col h-full rounded-lg bg-blue-50 shadow p-3 text-black dark:bg-gray-900 dark:text-white"
     >
       <UCard class="flex flex-col h-full">
-        <template #header>
-          <h2 class="text-xl font-semibold line-clamp-2">
-            {{ article.title }}
-          </h2>
-        </template>
+        <h2 class="text-xl font-semibold line-clamp-2">
+          {{ article.title }}
+        </h2>
 
         <p class="flex-1 line-clamp-3">
           {{ article.content }}

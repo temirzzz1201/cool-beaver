@@ -64,7 +64,6 @@
         </ul>
       </div>
 
-      <!-- Контакты -->
       <div>
         <h4 class="text-lg font-semibold mb-2 text-gray-600 dark:text-white">
           Контакты
