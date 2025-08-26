@@ -132,13 +132,13 @@ const columns: TableColumn<Article>[] = [
     accessorKey: "createdAt",
     header: ({ column }) => getHeader(column, "Создано"),
 
-    cell: ({ row }) => `${timeCreator(row.getValue("createdAt"))}`,
+    cell: ({ row }) => `${formatDate(row.getValue("createdAt"))}`,
   },
   {
     accessorKey: "updatedAt",
     header: ({ column }) => getHeader(column, "Обновлено"),
 
-    cell: ({ row }) => `${timeCreator(row.getValue("updatedAt"))}`,
+    cell: ({ row }) => `${formatDate(row.getValue("updatedAt"))}`,
   },
   {
     id: "actions",

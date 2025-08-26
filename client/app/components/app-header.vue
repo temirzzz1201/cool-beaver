@@ -9,7 +9,7 @@
   >
     <header
       v-show="visible"
-      class="fixed top-0 left-0 w-full z-50 bg-blue-200 dark:bg-gray-900 text-gray-600 backdrop-blur-sm shadow-md"
+      class="fixed top-0 left-0 w-full z-50 bg-blue-50 dark:bg-gray-900 text-gray-600 backdrop-blur-sm shadow-md"
     >
       <slot></slot>
     </header>

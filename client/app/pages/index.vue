@@ -37,16 +37,13 @@
   <section
     class="text-center py-12 bg-blue-50 dark:bg-gray-800 rounded-xl shadow mb-24"
   >
-    <h2 class="text-2xl font-semibold mb-4">Нужны рабочие уже сегодня?</h2>
-    <p class="mb-6 text-gray-600 dark:text-gray-300">
-      Свяжитесь с&nbsp;нами прямо сейчас и&nbsp;получите консультацию бесплатно
-    </p>
-    <NuxtLink
-      to="/contacts"
-      class="px-6 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition"
-    >
-      Связаться
-    </NuxtLink>
+    <app-ctx>
+      <template #title>Нужны рабочие уже сегодня?</template>
+      <template #text>
+        Свяжитесь с&nbsp;нами прямо сейчас и&nbsp;получите консультацию
+        бесплатно
+      </template>
+    </app-ctx>
   </section>
 </template>
 

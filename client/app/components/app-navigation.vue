@@ -68,7 +68,7 @@
           </svg>
         </button>
       </div>
-      <template #body>
+      <template #text>
         <ul class="flex flex-col">
           <li
             class="mb-4"
