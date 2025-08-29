@@ -39,7 +39,7 @@ export function useAuth() {
 
       redirectAfterAuth();
     } catch (error) {
-      throw new Error("Login error");
+      throw new Error(`Login error: ${error}`);
     }
   }
 
@@ -63,7 +63,7 @@ export function useAuth() {
 
       redirectAfterAuth();
     } catch (error) {
-      throw new Error("Register error");
+      throw new Error(`Register error: ${error}`);
     }
   }
 
@@ -84,9 +84,9 @@ export function useAuth() {
       user.value = data;
 
       token.value = storedToken;
-    } catch (e) {
+    } catch (error) {
       logout();
-      throw new Error("Failed to fetch user");
+      throw new Error(`Fetch user error: ${error}`);
     }
   }
 
@@ -105,6 +105,24 @@ export function useAuth() {
     return user.value?.role === "admin";
   }
 
+  async function getResetPasswordLink(email: string) {
+    try {
+      const res = await fetch(`${mainUrl}/api/auth/forgot-password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!res.ok) return;
+
+      const data = await res.json();
+    } catch (error) {
+      throw new Error(`Link getting error: ${error}`);
+    }
+  }
+
   return {
     token,
     user,
@@ -113,5 +131,6 @@ export function useAuth() {
     logout,
     fetchUser,
     isAdmin,
+    getResetPasswordLink,
   };
 }

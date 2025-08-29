@@ -1,30 +1,39 @@
 <template>
-  <div class="flex items-center justify-center h-[70vh]">
-    <u-form
+  <div class="flex flex-col items-center justify-center h-[70vh]">
+    <h1 class="text-2xl mb-8">Войти</h1>
+
+    <app-form
       :schema="schema"
       :state="state"
-      class="space-y-4"
-      @submit.prevent="onSubmit"
+      @submit="handleSubmit"
+      class="mb-4"
     >
-      <h1 class="text-2xl mb-8">Войти</h1>
       <u-form-field label="Почта" name="email">
-        <u-input v-model="state.email" />
+        <u-input v-model="state.email" type="email" class="min-w-[320px]" />
       </u-form-field>
 
       <u-form-field label="Пароль" name="password">
-        <u-input v-model="state.password" type="password" />
+        <u-input
+          v-model="state.password"
+          type="password"
+          class="min-w-[320px]"
+        />
       </u-form-field>
+    </app-form>
+    <p class="min-w-[320px]">
+      Нет аккаунта?
+      <client-only>
+        <nuxt-link
+          class="inline-flex text-blue-500 underline pl-2 mb-6"
+          to="/register"
+          >Зарегестрироваться</nuxt-link
+        >
 
-      <u-button color="secondary" type="submit"> Войти </u-button>
-      <p>
-        Нет аккаунта?
-        <client-only>
-          <nuxt-link class="text-blue-500 underline pl-2" to="/register"
-            >Зарегестрироваться</nuxt-link
-          >
-        </client-only>
-      </p>
-    </u-form>
+        <nuxt-link class="flex text-blue-500" to="/forgot-password"
+          >Забыли пароль?</nuxt-link
+        >
+      </client-only>
+    </p>
   </div>
 </template>
 
@@ -48,9 +57,12 @@ const state = reactive({
 });
 
 const toast = useToast();
-async function onSubmit(event: FormSubmitEvent<Schema>) {
+async function handleSubmit(event: FormSubmitEvent<Schema>) {
   try {
+    console.log("aaaaaaaaaaaa ", event.data);
+
     await login(event.data.email, event.data.password);
+
     if (event.data.email.length) {
       toast.add({
         title: "Отлично",
@@ -62,7 +74,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     toast.add({
       title: "Ошибка",
       description: `Ошибка входа`,
-      color: "success",
+      color: "error",
     });
     throw new Error(e.message) || "Login error";
   }

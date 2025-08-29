@@ -1,12 +1,15 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
+import { MailService } from '../mailer/mail.service';
 import { JwtService } from '@nestjs/jwt';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
+    private mailService: MailService,
   ) {}
 
   async register(name: string, email: string, password: string) {
@@ -33,5 +36,26 @@ export class AuthService {
         name: user.name,
       },
     };
+  }
+
+  async createPasswordLink(user) {
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    const hashedToken = crypto
+      .createHash('sha256')
+      .update(resetToken)
+      .digest('hex');
+    const tokenExpiry = Date.now() + 3600000;
+
+    user.resetPasswordToken = hashedToken;
+    user.resetPasswordExpires = tokenExpiry;
+    await user.save();
+
+    const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+
+    this.mailService.sendMail(
+      user.email,
+      'Link to change password, expires in 1h',
+      resetUrl,
+    );
   }
 }

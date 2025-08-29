@@ -1,5 +1,6 @@
 <template>
   <nuxt-link
+    v-if="articles.length > 0"
     v-for="article in props?.articles"
     :key="article.id"
     :to="`/articles/${article.id}`"
@@ -28,6 +29,7 @@
       </u-card>
     </article>
   </nuxt-link>
+  <h2 class="text-2xl text-red-500" v-else>Пока статей нет... (:</h2>
 </template>
 
 <script setup lang="ts">

@@ -1,4 +1,13 @@
-import { Controller, Post, Body, Get, UseGuards, Req } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  UseGuards,
+  Req,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { Request } from 'express';
 import { JwtAuthGuard } from 'src/common/guards/roles.guard';
 import { AuthService } from './auth.service';
@@ -25,8 +34,19 @@ export class AuthController {
   @Get('me')
   async getProfile(@Req() req: Request & { user: any }) {
     const user = await this.usersService.findById(req.user.id);
-    if (!user) return null;
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
     const { password, ...safeUser } = user.get({ plain: true });
     return safeUser;
+  }
+
+  @Post('forgot-password')
+  async forgotPassword(@Body('email') email: string) {
+    const user = await this.usersService.findByEmail(email);
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+    this.authService.createPasswordLink(user);
   }
 }

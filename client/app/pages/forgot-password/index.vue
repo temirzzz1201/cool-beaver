@@ -1,0 +1,40 @@
+<template>
+  <div class="flex items-center justify-center mt-38">
+    <u-form
+      :schema="schema"
+      :state="state"
+      class="space-y-4"
+      @submit="onSubmit"
+    >
+      <u-form-field label="Введите вашу почту" name="email">
+        <u-input v-model="state.email" type="email" class="min-w-[320px]" />
+      </u-form-field>
+
+      <u-button type="submit"> Отправить </u-button>
+    </u-form>
+  </div>
+</template>
+
+<script setup lang="ts">
+import type { FormSubmitEvent } from "@nuxt/ui";
+import * as v from "valibot";
+import { useAuth } from "~/composables/useAuth";
+
+const { getResetPasswordLink } = useAuth();
+
+const schema = v.object({
+  email: v.pipe(v.string(), v.email("Неверный email")),
+});
+
+const state = reactive<{ email: string }>({
+  email: "",
+});
+
+const toast = useToast();
+async function onSubmit(event: FormSubmitEvent<typeof state>) {
+  // toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
+  console.log(event.data);
+  await getResetPasswordLink(event.data.email);
+  state.email = "";
+}
+</script>

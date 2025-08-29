@@ -1,33 +1,41 @@
 <template>
-  <div class="flex items-center justify-center h-[70vh]">
-    <u-form
+  <div class="flex flex-col items-center justify-center h-[70vh]">
+    <h1 class="text-2xl mb-8">Создать аккаунт</h1>
+
+    <app-form
       :schema="schema"
       :state="state"
-      class="space-y-4"
-      @submit.prevent="onSubmit"
+      @submit="handleSubmit"
+      class="mb-4"
     >
-      <h1 class="text-2xl mb-8">Создать аккаунт</h1>
       <u-form-field label="Имя" name="name">
-        <u-input v-model="state.name" />
+        <u-input v-model="state.name" class="min-w-[320px]" />
       </u-form-field>
       <u-form-field label="Почта" name="email">
-        <u-input v-model="state.email" />
+        <u-input v-model="state.email" type="email" class="min-w-[320px]" />
       </u-form-field>
 
       <u-form-field label="Пароль" name="password">
-        <u-input v-model="state.password" type="password" />
+        <u-input
+          v-model="state.password"
+          type="password"
+          class="min-w-[320px]"
+        />
       </u-form-field>
-
-      <u-button color="secondary" type="submit"> Регистрация </u-button>
-      <p>
-        Уже есть аккаунт?
-        <client-only>
-          <nuxt-link class="text-blue-500 underline pl-2" to="/login"
-            >Войти</nuxt-link
-          >
-        </client-only>
-      </p>
-    </u-form>
+    </app-form>
+    <p class="min-w-[320px]">
+      Уже есть аккаунт?
+      <client-only>
+        <nuxt-link
+          class="inline-flex text-blue-500 underline pl-2 mb-6"
+          to="/login"
+          >Войти</nuxt-link
+        >
+        <nuxt-link class="flex text-blue-500" to="/forgot-password"
+          >Забыли пароль?</nuxt-link
+        >
+      </client-only>
+    </p>
   </div>
 </template>
 
@@ -53,7 +61,7 @@ const state = reactive({
 });
 
 const toast = useToast();
-async function onSubmit(event: FormSubmitEvent<Schema>) {
+async function handleSubmit(event: FormSubmitEvent<Schema>) {
   try {
     await register(event.data.name, event.data.email, event.data.password);
     if (event.data.email.length) {
