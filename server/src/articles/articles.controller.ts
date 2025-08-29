@@ -6,6 +6,7 @@ import {
   Param,
   Put,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
@@ -23,6 +24,15 @@ export class ArticlesController {
   @Get()
   findAll() {
     return this.articlesService.findAll();
+  }
+
+  @Get('paginated')
+  findPaginated(
+    @Query('page') page = 1,
+    @Query('limit') limit = 12,
+    @Query('q') q?: string,
+  ) {
+    return this.articlesService.findPaginated(+page, +limit, q);
   }
 
   @Get('last')

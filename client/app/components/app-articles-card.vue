@@ -8,12 +8,12 @@
     <article
       class="flex flex-col h-full rounded-lg bg-blue-50 shadow p-3 text-black dark:bg-gray-900 dark:text-white"
     >
-      <UCard class="flex flex-col h-full">
-        <h2 class="text-xl font-semibold line-clamp-2">
+      <u-card class="flex flex-col h-full">
+        <h2 class="text-xl text-gray-700 font-semibold line-clamp-2">
           {{ article.title }}
         </h2>
 
-        <p class="flex-1 line-clamp-3">
+        <p class="flex-1 text-gray-600 line-clamp-3">
           {{ article.content }}
         </p>
 
@@ -25,7 +25,7 @@
             {{ formatDate(article.createdAt) }}
           </small>
         </template>
-      </UCard>
+      </u-card>
     </article>
   </nuxt-link>
 </template>

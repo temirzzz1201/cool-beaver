@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white"
+    class="flex flex-col min-h-screen bg-blue-50 text-black dark:bg-gray-900 dark:text-white"
   >
     <app-header>
       <app-navigation />

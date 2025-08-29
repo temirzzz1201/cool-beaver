@@ -1,12 +1,12 @@
 <template>
-  <UModal v-model:open="isOpen">
+  <u-modal v-model:open="isOpen">
     <template #header>
       <h3 class="text-lg font-semibold">{{ title }}</h3>
     </template>
     <template #content>
       <slot />
     </template>
-  </UModal>
+  </u-modal>
 </template>
 
 <script setup lang="ts">

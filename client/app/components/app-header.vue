@@ -9,16 +9,16 @@
   >
     <header
       v-show="visible"
-      class="fixed top-0 left-0 w-full z-50 bg-blue-50 dark:bg-gray-900 text-gray-600 backdrop-blur-sm shadow-md"
+      class="fixed top-0 left-0 w-full z-50 bg-blue-200 dark:bg-gray-900 text-gray-600 backdrop-blur-sm shadow-md"
     >
       <slot></slot>
+      <u-separator />
+      <div class="h-[30px] hidden md:block"></div>
     </header>
   </transition>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
-
 const visible = ref(true);
 let lastScroll = 0;
 

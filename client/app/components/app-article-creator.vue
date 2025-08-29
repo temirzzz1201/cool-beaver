@@ -1,16 +1,20 @@
 <template>
-  <UForm
+  <u-form
     :schema="schema"
     :state="state"
     class="space-y-4 w-full"
     @submit="onSubmit"
   >
-    <UFormField label="Заголовок" name="title">
-      <UInput placeholder="Заголовок..." v-model="state.title" class="w-full" />
-    </UFormField>
+    <u-form-field label="Заголовок" name="title">
+      <u-input
+        placeholder="Заголовок..."
+        v-model="state.title"
+        class="w-full"
+      />
+    </u-form-field>
 
-    <UFormField label="Контент" name="content">
-      <UTextarea
+    <u-form-field label="Контент" name="content">
+      <u-textarea
         placeholder="Текст статьи..."
         autoresize
         v-model="state.content"
@@ -18,10 +22,10 @@
         :rows="12"
         class="w-full"
       />
-    </UFormField>
+    </u-form-field>
 
-    <UButton type="submit"> Создать </UButton>
-  </UForm>
+    <u-button type="submit"> Создать </u-button>
+  </u-form>
 </template>
 
 <script setup lang="ts">

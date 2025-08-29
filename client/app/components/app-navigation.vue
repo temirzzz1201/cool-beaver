@@ -8,14 +8,11 @@
       <li
         v-for="(link, index) in store.navLinks"
         :key="link.id"
-        :class="[
-          'cursor-pointer',
-          index !== store.navLinks.length - 1 ? 'mr-5' : 'mr-0',
-        ]"
+        :class="index !== store.navLinks.length - 1 ? 'mr-5' : ''"
       >
         <u-link
           :to="link.link"
-          class="text-lg text-gray-600 dark:bg-gray-900 dark:text-white"
+          class="text-[16px] text-gray-600 dark:text-white"
           active-class="font-bold"
           inactive-class="text-muted"
         >
@@ -33,51 +30,54 @@
       </client-only>
     </ul>
 
-    <u-drawer v-model:open="open" title="Tasko" direction="left">
-      <div class="md:hidden flex items-center">
-        <button class="text-white focus:outline-none">
-          <svg
-            v-if="!open"
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-          <svg
-            v-else
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      </div>
-      <template #text>
-        <ul class="flex flex-col">
-          <li
-            class="mb-4"
-            v-for="(link, index) in store.navLinks"
-            :key="link.id"
-          >
+    <div class="md:hidden flex items-center">
+      <button @click="open = !open" class="text-gray-400 focus:outline-none">
+        <svg
+          v-if="!open"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+        <svg
+          v-else
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <u-drawer
+      v-model:open="open"
+      title="Tasko"
+      description="Ваши рабочие сегодня"
+      direction="left"
+    >
+      <template #body>
+        <ul class="flex flex-col mt-8">
+          <li v-for="link in store.navLinks" :key="link.id" class="mb-4">
             <u-link
+              v-if="link.title"
               :to="link.link"
-              class="text-black dark:bg-gray-900 dark:text-white"
+              class="text-black dark:text-white"
               active-class="font-bold"
               inactive-class="text-muted"
             >
@@ -104,10 +104,6 @@ const store = useMainStore();
 
 const colorMode = useColorMode();
 const open = ref(false);
-
-defineShortcuts({
-  o: () => (open.value = !open.value),
-});
 
 const isDark = computed({
   get() {

@@ -19,6 +19,9 @@ onMounted(() => {
   store.contactsMapPoints.forEach((point) => {
     L.marker([point.lat, point.lng]).addTo(map).bindPopup(point.name);
   });
+
+  const flag = document.querySelector(".leaflet-control-attribution");
+  flag.style.display = "none";
 });
 </script>
 

@@ -8,7 +8,7 @@ const { tabsItems } = storeToRefs(store);
 </script>
 
 <template>
-  <UTabs
+  <u-tabs
     orientation="vertical"
     variant="link"
     :items="tabsItems"
@@ -25,5 +25,5 @@ const { tabsItems } = storeToRefs(store);
         </div>
       </section>
     </template>
-  </UTabs>
+  </u-tabs>
 </template>

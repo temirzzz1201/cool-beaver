@@ -1,33 +1,33 @@
 <template>
   <div class="flex items-center justify-center h-[70vh]">
-    <UForm
+    <u-form
       :schema="schema"
       :state="state"
       class="space-y-4"
       @submit.prevent="onSubmit"
     >
-      <h1 class="text-3xl mb-8">Регистрация</h1>
-      <UFormField label="Имя" name="name">
-        <UInput v-model="state.name" />
-      </UFormField>
-      <UFormField label="Почта" name="email">
-        <UInput v-model="state.email" />
-      </UFormField>
+      <h1 class="text-2xl mb-8">Создать аккаунт</h1>
+      <u-form-field label="Имя" name="name">
+        <u-input v-model="state.name" />
+      </u-form-field>
+      <u-form-field label="Почта" name="email">
+        <u-input v-model="state.email" />
+      </u-form-field>
 
-      <UFormField label="Пароль" name="password">
-        <UInput v-model="state.password" type="password" />
-      </UFormField>
+      <u-form-field label="Пароль" name="password">
+        <u-input v-model="state.password" type="password" />
+      </u-form-field>
 
-      <UButton type="submit"> Регистрация </UButton>
+      <u-button color="secondary" type="submit"> Регистрация </u-button>
       <p>
-        Нет аккаунта?
+        Уже есть аккаунт?
         <client-only>
-          <NuxtLink class="text-cyan-300 underline pl-2" to="/login"
-            >Войти</NuxtLink
+          <nuxt-link class="text-blue-500 underline pl-2" to="/login"
+            >Войти</nuxt-link
           >
         </client-only>
       </p>
-    </UForm>
+    </u-form>
   </div>
 </template>
 

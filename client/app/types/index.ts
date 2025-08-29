@@ -27,6 +27,7 @@ export interface Users {
 }
 
 export interface TabsItems {
+  id: number;
   label: TabLabel;
   icon: string;
 }
@@ -44,7 +45,8 @@ export interface MapPoints {
 }
 
 export interface AppFeature {
+  id: number;
   icon: string;
-  title: string;
+  title?: string;
   text: string;
 }

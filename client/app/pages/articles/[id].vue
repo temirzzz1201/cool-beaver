@@ -15,17 +15,14 @@
     <p v-else-if="error" class="text-red-500">Ошибка загрузки статьи</p>
     <p v-else class="text-gray-600 dark:text-gray-300">Загрузка...</p>
   </section>
-  <section
-    class="text-center py-8 bg-blue-50 dark:bg-gray-800 rounded-xl shadow mt-10"
-  >
-    <app-ctx>
-      <template #title> Хотите такой&nbsp;же результат?</template>
-      <template #text>
-        Свяжитесь с&nbsp;нами, и&nbsp;мы&nbsp;выполним работу профессионально
-        и&nbsp;быстро.
-      </template>
-    </app-ctx>
-  </section>
+
+  <app-ctx>
+    <template #title> Хотите такой&nbsp;же результат?</template>
+    <template #text>
+      Свяжитесь с&nbsp;нами, и&nbsp;мы&nbsp;выполним работу профессионально
+      и&nbsp;быстро.
+    </template>
+  </app-ctx>
 </template>
 
 <script setup lang="ts">

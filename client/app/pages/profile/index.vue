@@ -1,10 +1,10 @@
 <template>
   <client-only>
-    <div>
+    <section>
       <h1>Профиль пользователя</h1>
       <p>Email: {{ user?.email }}</p>
       <u-button @click="logout">Logout</u-button>
-    </div>
+    </section>
   </client-only>
 </template>
 

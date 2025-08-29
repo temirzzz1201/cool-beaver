@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-4 mt-60">
-    <UTable
+    <u-table
       ref="table"
       v-model:sorting="sorting"
       v-model:pagination="pagination"
@@ -16,7 +16,7 @@
     />
 
     <div class="flex justify-center border-t border-default pt-4">
-      <UPagination
+      <u-pagination
         :default-page="
           (table?.tableApi?.getState().pagination.pageIndex || 0) + 1
         "
