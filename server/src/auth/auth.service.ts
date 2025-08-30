@@ -46,6 +46,9 @@ export class AuthService {
       .digest('hex');
     const tokenExpiry = Date.now() + 3600000;
 
+    console.log('Generated Token:', resetToken);
+    console.log('Hashed Token:', hashedToken);
+
     user.resetPasswordToken = hashedToken;
     user.resetPasswordExpires = tokenExpiry;
     await user.save();
@@ -54,8 +57,15 @@ export class AuthService {
 
     this.mailService.sendMail(
       user.email,
-      'Link to change password, expires in 1h',
+      'Ссылка для восстановления пароля, действует 1 час!',
       resetUrl,
+      `<a href="${resetUrl}">Перейти, что бы восстановить</a>`,
     );
+  }
+
+  async findByResetPasswordToken(token: string) {
+    const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
+
+    return this.usersService.findByResetPasswordToken(hashedToken);
   }
 }

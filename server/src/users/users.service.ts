@@ -19,6 +19,12 @@ export class UsersService {
     return this.userModel.findOne({ where: { id } });
   }
 
+  async findByResetPasswordToken(token: string) {
+    return this.userModel.findOne({
+      where: { resetPasswordToken: token },
+    });
+  }
+
   async create(dto: CreateUserDto): Promise<User> {
     const { name, email, password } = dto;
     const existingAdmin = await this.userModel.findOne({

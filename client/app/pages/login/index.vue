@@ -59,8 +59,6 @@ const state = reactive({
 const toast = useToast();
 async function handleSubmit(event: FormSubmitEvent<Schema>) {
   try {
-    console.log("aaaaaaaaaaaa ", event.data);
-
     await login(event.data.email, event.data.password);
 
     if (event.data.email.length) {

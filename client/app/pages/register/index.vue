@@ -75,7 +75,7 @@ async function handleSubmit(event: FormSubmitEvent<Schema>) {
     toast.add({
       title: "Ошибка",
       description: `Ошибка регистрации`,
-      color: "success",
+      color: "error",
     });
     throw new Error(e.message) || "Registr error";
   }

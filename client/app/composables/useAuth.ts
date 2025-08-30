@@ -107,7 +107,7 @@ export function useAuth() {
 
   async function getResetPasswordLink(email: string) {
     try {
-      const res = await fetch(`${mainUrl}/api/auth/forgot-password`, {
+      const response = await fetch(`${mainUrl}/api/auth/forgot-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -115,11 +115,40 @@ export function useAuth() {
         body: JSON.stringify({ email }),
       });
 
-      if (!res.ok) return;
+      if (!response.ok) return;
 
-      const data = await res.json();
+      const data = await response.json();
+
+      return data;
     } catch (error) {
       throw new Error(`Link getting error: ${error}`);
+    }
+  }
+
+  async function resetPassword(resetToken: string, password: string) {
+    try {
+      const response = await fetch(
+        `${mainUrl}/api/auth/reset-password/${resetToken}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ password }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error response:", errorData);
+        throw new Error("Не удалось сбросить пароль. Попробуйте еще раз.");
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      throw new Error(`Reset password error: ${error}`);
     }
   }
 
@@ -132,5 +161,6 @@ export function useAuth() {
     fetchUser,
     isAdmin,
     getResetPasswordLink,
+    resetPassword,
   };
 }

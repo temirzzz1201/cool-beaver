@@ -36,4 +36,16 @@ export class User extends Model<User> {
     defaultValue: DataType.NOW,
   })
   declare creationDate: Date;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+  })
+  declare resetPasswordToken: string | null;
+
+  @Column({
+    type: DataType.BIGINT,
+    allowNull: true,
+  })
+  declare resetPasswordExpires: number | null;
 }

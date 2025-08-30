@@ -32,9 +32,16 @@ const state = reactive<{ email: string }>({
 
 const toast = useToast();
 async function onSubmit(event: FormSubmitEvent<typeof state>) {
-  // toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
-  console.log(event.data);
-  await getResetPasswordLink(event.data.email);
-  state.email = "";
+  try {
+    const response = await getResetPasswordLink(event.data.email);
+    toast.add({
+      title: "Success",
+      description: response.message,
+      color: "success",
+    });
+    state.email = "";
+  } catch (error) {
+    throw new Error(`sending link error: ${error}`);
+  }
 }
 </script>

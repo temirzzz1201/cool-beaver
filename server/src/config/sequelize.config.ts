@@ -13,4 +13,5 @@ export const sequelizeConfig: SequelizeModuleOptions = {
   models: [Article, User],
   autoLoadModels: true,
   synchronize: true,
+  logging: console.log,
 };
