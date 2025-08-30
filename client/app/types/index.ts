@@ -1,5 +1,12 @@
+export interface ArticleImage {
+  id: number;
+  articleId: number;
+  path: string;
+}
+
 export interface Article {
   id: number;
+  images: ArticleImage[];
   title: string;
   content: string;
   createdAt?: string;

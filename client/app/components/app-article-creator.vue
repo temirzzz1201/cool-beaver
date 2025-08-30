@@ -18,13 +18,16 @@
         placeholder="Текст статьи..."
         autoresize
         v-model="state.content"
-        type="content"
         :rows="12"
         class="w-full"
       />
     </u-form-field>
 
-    <u-button type="submit"> Создать </u-button>
+    <u-form-field label="Изображения" name="images">
+      <input type="file" multiple @change="handleFiles" />
+    </u-form-field>
+
+    <u-button type="submit">Создать</u-button>
   </u-form>
 </template>
 
@@ -42,34 +45,53 @@ type Schema = v.InferOutput<typeof schema>;
 const state = reactive({
   title: "",
   content: "",
+  files: [] as File[],
 });
 
 const toast = useToast();
 
+function handleFiles(event: Event) {
+  const target = event.target as HTMLInputElement;
+  if (target.files) {
+    state.files = Array.from(target.files);
+  }
+}
+
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   try {
-    await fetch(`${mainUrl}/api/articles/create`, {
+    const formData = new FormData();
+    formData.append("title", event.data.title);
+    formData.append("content", event.data.content);
+
+    if (state.files.length > 0) {
+      state.files.forEach((file) => formData.append("images", file));
+    }
+
+    const res = await fetch(`${mainUrl}/api/articles/create`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: event.data.title,
-        content: event.data.content,
-      }),
+      body: formData,
     });
+
+    if (!res.ok) {
+      throw new Error("Ошибка на сервере при создании статьи");
+    }
+
     toast.add({
-      title: "Success",
-      description: "Статья быда успешно создана",
+      title: "Успех",
+      description: "Статья успешно создана",
       color: "success",
     });
+
+    state.title = "";
+    state.content = "";
+    state.files = [];
   } catch (error) {
+    console.error(error);
     toast.add({
-      title: "Success",
-      description: "Ошибка создания статьи",
-      color: "success",
+      title: "Ошибка",
+      description: "Не удалось создать статью",
+      color: "error",
     });
-    throw new Error(`Ошибка создания статьи: ${error}`);
   }
 }
 </script>

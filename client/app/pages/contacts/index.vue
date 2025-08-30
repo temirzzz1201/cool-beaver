@@ -38,30 +38,30 @@
       class="grid gap-4 max-w-[340px] w-full"
       @submit="onSubmit"
     >
-      <u-form-group label="Ваше имя" name="name" required>
+      <u-form-field label="Ваше имя" name="name" required>
         <u-input
           v-model="form.name"
           placeholder="Введите имя"
           class="max-w-[340px] w-full"
         />
-      </u-form-group>
+      </u-form-field>
 
-      <u-form-group label="Телефон" name="phone" required>
+      <u-form-field label="Телефон" name="phone" required>
         <u-input
           v-model="form.phone"
           type="tel"
           placeholder="+7 (___) ___-__-__"
           class="max-w-[340px] w-full"
         />
-      </u-form-group>
+      </u-form-field>
 
-      <u-form-group label="Сообщение" name="message">
-        <u-text-area
+      <u-form-field label="Сообщение" name="message">
+        <u-textarea
           v-model="form.message"
           placeholder="Ваше сообщение"
           class="max-w-[340px] w-full"
         />
-      </u-form-group>
+      </u-form-field>
 
       <u-button
         class="flex items-center justify-center cursor-pointer w-[140px]"

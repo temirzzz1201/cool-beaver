@@ -5,7 +5,9 @@ import {
   DataType,
   PrimaryKey,
   AutoIncrement,
+  HasMany,
 } from 'sequelize-typescript';
+import { ArticleImage } from './articles-image.model';
 
 @Table({ tableName: 'articles' })
 export class Article extends Model<Article> {
@@ -19,4 +21,7 @@ export class Article extends Model<Article> {
 
   @Column({ type: DataType.TEXT })
   declare content: string;
+
+  @HasMany(() => ArticleImage)
+  images: ArticleImage[];
 }

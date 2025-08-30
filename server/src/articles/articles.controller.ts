@@ -7,18 +7,38 @@ import {
   Put,
   Delete,
   Query,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { UploadedFiles } from '@nestjs/common';
 
 @Controller('api/articles')
 export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
 
   @Post('create')
-  create(@Body() dto: CreateArticleDto) {
-    return this.articlesService.create(dto);
+  @UseInterceptors(
+    FilesInterceptor('images', 5, {
+      storage: diskStorage({
+        destination: '/var/www/uploads/articles',
+        filename: (req, file, cb) => {
+          const uniqueSuffix =
+            Date.now() + '-' + Math.round(Math.random() * 1e9);
+          cb(null, uniqueSuffix + extname(file.originalname));
+        },
+      }),
+    }),
+  )
+  create(
+    @Body() dto: CreateArticleDto,
+    @UploadedFiles() files?: Express.Multer.File[],
+  ) {
+    return this.articlesService.create(dto, files);
   }
 
   @Get()
