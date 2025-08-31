@@ -24,7 +24,7 @@ export class ArticlesService {
       await this.articleImageModel.bulkCreate(images as any);
     }
 
-    return this.findOne(article.id); // возвращаем с картинками
+    return this.findOne(article.id);
   }
 
   findAll() {
@@ -36,8 +36,9 @@ export class ArticlesService {
   }
 
   findLast() {
-    return this.articleModel.findOne({
+    return this.articleModel.findAll({
       order: [['id', 'DESC']],
+      limit: 4,
       include: [ArticleImage],
     });
   }

@@ -13,7 +13,20 @@
     >
       <slot></slot>
       <u-separator />
-      <div class="h-[30px] hidden md:block"></div>
+      <div class="h-[30px] hidden md:flex md:items-center md:justify-end pr-4">
+        <u-link
+          href="mailto:name@email.com"
+          class="text-[14px] dark:text-white font-bold mr-2"
+        >
+          ✉️ name@email.com
+        </u-link>
+        <u-link
+          href="tel:+790000000"
+          class="text-[14px] font-bold dark:text-white"
+        >
+          тел: 8 900 000 00 00
+        </u-link>
+      </div>
     </header>
   </transition>
 </template>

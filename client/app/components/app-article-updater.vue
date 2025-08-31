@@ -70,7 +70,6 @@ const updateArticle = async (article: Article) => {
       },
       body: JSON.stringify(updateData),
     });
-    console.log("Обновлено:", article);
   } catch (error) {
     console.error("Ошибка обновления:", error);
   }
@@ -86,7 +85,6 @@ const deleteArticle = async (id: number) => {
     });
 
     tableDataArray.value = tableDataArray.value.filter((a) => a.id !== id);
-    console.log(`Статья с id ${id} удалена`);
   } catch (error) {
     console.error("Ошибка удаления:", error);
   }

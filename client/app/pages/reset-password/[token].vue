@@ -59,11 +59,9 @@ async function handleSubmit() {
 
   try {
     const response = await resetPassword(resetToken, state.value.password);
-    console.log("response ", response);
-
     toast.add({
       title: "Успех",
-      description: "Пароль успешно изменен",
+      description: response.message,
       color: "success",
     });
     router.push("/login");

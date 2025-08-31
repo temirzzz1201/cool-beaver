@@ -1,17 +1,8 @@
 <template>
   <section
-    class="px-4 py-8 max-w-[1024px] mx-auto dark:bg-gray-900 dark:text-white mt-24 max-[768px]:mt-20 mb-24"
+    class="px-4 py-8 dark:bg-gray-900 dark:text-white mt-24 max-[768px]:mt-20 mb-24"
   >
-    <article v-if="article" class="prose max-w-none dark:prose-invert">
-      <header class="mb-6">
-        <h1 class="text-3xl font-bold">{{ article.title }}</h1>
-        <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
-          Опубликовано: {{ formatDate(article.createdAt) }}
-        </p>
-      </header>
-      <p class="mb-8">{{ article.content }}</p>
-    </article>
-
+    <app-articles-card v-if="article" :articles="[article]" is-detail />
     <p v-else-if="error" class="text-red-500">Ошибка загрузки статьи</p>
     <p v-else class="text-gray-600 dark:text-gray-300">Загрузка...</p>
   </section>

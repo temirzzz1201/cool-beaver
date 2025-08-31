@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="w-full max-w-[1920px] flex justify-between px-3 py-4 mr-auto ml-auto"
+    class="w-full max-w-[1920px] flex justify-between items-center px-3 py-4 mr-auto ml-auto"
   >
     <app-logo />
 
@@ -84,12 +84,26 @@
               {{ link.title }}
             </u-link>
           </li>
+          <li class="mb-4">
+            <u-link
+              href="mailto:name@email.com"
+              class="text-black dark:text-white"
+            >
+              name@email.com
+            </u-link>
+          </li>
+          <li class mb-4>
+            <u-link href="tel:+790000000" class="text-black dark:text-white">
+              8 900 000 00 00
+            </u-link>
+          </li>
           <client-only v-if="!colorMode?.forced">
             <u-button
               :icon="isDark ? 'i-lucide-moon' : 'i-lucide-sun'"
               color="neutral"
               variant="ghost"
               @click="isDark = !isDark"
+              class="pt-4"
             />
           </client-only>
         </ul>

@@ -48,7 +48,7 @@
         <div class="flex flex-col gap-1 text-sm">
           <u-link
             href="mailto:name@email.com"
-            class="hover:underline text-[16px] dark:text-white"
+            class="hover:underline text-[16px] dark:text-white mb-4"
           >
             ✉️ name@email.com
           </u-link>

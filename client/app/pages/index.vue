@@ -11,7 +11,7 @@
     </h2>
   </section>
   <section class="mb-14 max-[768px]:mt-20">
-    <app-slider />
+    <app-slider :slides="slides" />
   </section>
 
   <section class="mb-14 max-w-[1920px] mx-auto text-left">
@@ -31,7 +31,9 @@
     <h2 class="text-2xl text-gray-700 font-semibold mb-6 text-left">
       Полезные материалы
     </h2>
-    <app-articles-card v-if="lastArticle" :articles="[lastArticle]" />
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+      <app-articles-card v-if="lastArticles" :articles="lastArticles" />
+    </div>
   </section>
 
   <section class="mb-14 max-w-[1920px] mx-auto text-left">
@@ -64,7 +66,12 @@ import { storeToRefs } from "#imports";
 const store = useMainStore();
 const { appFeatureBenefitsArray, appFeatureServicesArray } = storeToRefs(store);
 
-const { data: lastArticle } = await useAsyncData<Article>("last-article", () =>
-  $fetch(`${mainUrl}/api/articles/last`)
+const { data: lastArticles } = await useAsyncData<
+  (Article & { images?: { path: string }[] })[]
+>("last-articles", () => $fetch(`${mainUrl}/api/articles/last`));
+
+const slides = Array.from(
+  { length: 6 },
+  (_, i) => `/slider/worker${i + 1}.jpg`
 );
 </script>
