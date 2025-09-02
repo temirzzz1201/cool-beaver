@@ -68,7 +68,7 @@ const { appFeatureBenefitsArray, appFeatureServicesArray } = storeToRefs(store);
 
 const { data: lastArticles } = await useAsyncData<
   (Article & { images?: { path: string }[] })[]
->("last-articles", () => $fetch(`${mainUrl}/api/articles/last`));
+>("last-articles", () => $fetch(`${mainUrl}/articles/last`));
 
 const slides = Array.from(
   { length: 6 },

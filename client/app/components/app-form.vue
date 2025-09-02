@@ -6,7 +6,9 @@
     @submit.prevent="(e) => emit('submit', e)"
   >
     <slot></slot>
-    <u-button color="secondary" type="submit"> Отправить </u-button>
+    <u-button color="secondary" type="submit" class="cursor-pointer">
+      Отправить
+    </u-button>
   </u-form>
 </template>
 

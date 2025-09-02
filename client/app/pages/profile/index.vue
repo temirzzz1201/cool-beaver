@@ -3,8 +3,7 @@
     <section class="max-w-4xl mx-auto py-10">
       <h1 class="text-3xl font-bold mb-6">Личный кабинет</h1>
 
-      <UTabs :items="items" class="w-full">
-        <!-- Профиль -->
+      <u-tabs :items="profileTabsItems" class="w-full">
         <template #profile>
           <div class="space-y-4">
             <p><b>Имя:</b> {{ user?.name }}</p>
@@ -14,10 +13,13 @@
           </div>
         </template>
 
-        <!-- Мои заказы -->
         <template #orders>
           <div v-if="orders?.length" class="space-y-4">
-            <u-card v-for="order in orders" :key="order.id" class="p-4">
+            <u-card
+              v-for="order in paginatedOrders"
+              :key="order.id"
+              class="p-4"
+            >
               <h3 class="font-semibold text-lg">{{ order.title }}</h3>
               <p class="text-gray-600">{{ order.description }}</p>
               <p class="text-sm text-gray-500">
@@ -25,11 +27,21 @@
                 {{ formatDate(order.createdAt) }}
               </p>
             </u-card>
+
+            <div v-if="orders.length > limit" class="flex justify-center mt-4">
+              <u-pagination
+                v-model:page="page"
+                :items-per-page="limit"
+                :total="orders.length"
+                show-edges
+                color="secondary"
+                active-color="secondary"
+              />
+            </div>
           </div>
           <p v-else class="text-gray-500">Пока заказов нет.</p>
         </template>
 
-        <!-- Создать заказ -->
         <template #create>
           <app-form
             :schema="schema"
@@ -44,25 +56,36 @@
             <u-form-field label="Описание" name="description">
               <u-textarea v-model="state.description" class="min-w-[320px]" />
             </u-form-field>
-
-            <u-button type="submit" color="primary">Создать заказ</u-button>
           </app-form>
         </template>
-      </UTabs>
+      </u-tabs>
     </section>
   </client-only>
 </template>
 
 <script setup lang="ts">
-import type { TabsItem } from "@nuxt/ui";
 import * as v from "valibot";
 import { useAuth } from "~/composables/useAuth";
 import { formatDate } from "#imports";
+import { useMainStore } from "#imports";
+import { storeToRefs } from "#imports";
 
 definePageMeta({ middleware: ["auth-user"] });
 
+const store = useMainStore();
+
+const { profileTabsItems } = storeToRefs(store);
+
+const { $api } = useNuxtApp();
+
 const { user, logout } = useAuth();
 const orders = ref<any[]>([]);
+
+const page = ref(1);
+const limit = 5;
+const paginatedOrders = computed(() =>
+  orders.value.slice((page.value - 1) * limit, page.value * limit)
+);
 
 const schema = v.object({
   title: v.string("Введите заголовок"),
@@ -71,37 +94,28 @@ const schema = v.object({
     v.minLength(8, "Описание должно быть минимум 8 символов")
   ),
 });
-type Schema = v.InferOutput<typeof schema>;
 
 const state = reactive({
   title: "",
   description: "",
 });
 
-// const fetchOrders = async () => {
-//   orders.value = await $fetch(`${mainUrl}/api/orders/my`, {
-//     method: "GET",
-//   });
-// };
+const fetchOrders = async () => {
+  orders.value = await $api("/orders/my-orders");
+};
 
 const createOrder = async () => {
   if (!state.title) return;
 
-  // await $fetch(`${mainUrl}/api/orders`, {
-  //   method: "POST",
-  //   body: { ...state },
-  // });
+  await $api("/orders/create", {
+    method: "POST",
+    body: { ...state },
+  });
 
-  // state.title = "";
-  // state.description = "";
-  // await fetchOrders();
+  state.title = "";
+  state.description = "";
+  await fetchOrders();
 };
 
-// onMounted(fetchOrders);
-
-const items: TabsItem[] = [
-  { label: "Профиль", icon: "i-lucide-user", slot: "profile" },
-  { label: "Мои заказы", icon: "i-lucide-list", slot: "orders" },
-  { label: "Создать заказ", icon: "i-lucide-plus-circle", slot: "create" },
-];
+onMounted(fetchOrders);
 </script>

@@ -67,7 +67,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       state.files.forEach((file) => formData.append("images", file));
     }
 
-    const res = await fetch(`${mainUrl}/api/articles/create`, {
+    const res = await fetch(`${mainUrl}/articles/create`, {
       method: "POST",
       body: formData,
     });

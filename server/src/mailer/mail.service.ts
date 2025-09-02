@@ -17,7 +17,7 @@ export class MailService {
 
   async sendMail(to: string, subject: string, text: string, html?: string) {
     const mailOptions = {
-      from: process.env.SMTP_FROM,
+      from: `"компания Tasko" <${process.env.SMTP_FROM}>`,
       to,
       subject,
       text,

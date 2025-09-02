@@ -29,7 +29,7 @@ export const useMainStore = defineStore("mainStore", () => {
       title: "Личный кабинет",
       link: "/profile",
     },
-      {
+    {
       id: 5,
       title: "Авторизация",
       link: "/login",
@@ -41,7 +41,7 @@ export const useMainStore = defineStore("mainStore", () => {
     { lat: 45.034413, lng: 38.971855, name: "Рашпилевская" },
   ]);
 
-  const tabsItems = ref<TabsItems[]>([
+  const adminTabsItems = ref<TabsItems[]>([
     {
       id: 1,
       label: TabLabel.Chart,
@@ -58,6 +58,17 @@ export const useMainStore = defineStore("mainStore", () => {
 
       label: TabLabel.Update,
       icon: "i-lucide-file-text",
+    },
+  ]);
+
+  const profileTabsItems = ref<TabsItems[]>([
+    { id: 1, label: TabLabel.Profile, icon: "i-lucide-user", slot: "profile" },
+    { id: 2, label: TabLabel.MyOrders, icon: "i-lucide-list", slot: "orders" },
+    {
+      id: 3,
+      label: TabLabel.CreateOrder,
+      icon: "i-lucide-plus-circle",
+      slot: "create",
     },
   ]);
 
@@ -165,10 +176,11 @@ export const useMainStore = defineStore("mainStore", () => {
   return {
     contactsMapPoints,
     navLinks,
-    tabsItems,
+    adminTabsItems,
     appFeatureServicesArray,
     appFeatureBenefitsArray,
     footerFeatureArray,
     contactsFeatureArray,
+    profileTabsItems,
   };
 });

@@ -30,7 +30,7 @@ export class OrdersController {
     return this.ordersService.findAll();
   }
 
-  @Get('my')
+  @Get('my-orders')
   findMy(@User() user: UserModel) {
     return this.ordersService.findMy(user.id);
   }

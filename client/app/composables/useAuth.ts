@@ -21,7 +21,7 @@ export function useAuth() {
 
   async function login(email: string, password: string) {
     try {
-      const res = await fetch(`${mainUrl}/api/auth/login`, {
+      const res = await fetch(`${mainUrl}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -45,7 +45,7 @@ export function useAuth() {
 
   async function register(name: string, email: string, password: string) {
     try {
-      const res = await fetch(`${mainUrl}/api/auth/register`, {
+      const res = await fetch(`${mainUrl}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -74,7 +74,7 @@ export function useAuth() {
     if (!storedToken) return;
 
     try {
-      const res = await fetch(`${mainUrl}/api/auth/me`, {
+      const res = await fetch(`${mainUrl}/auth/me`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       });
 
@@ -108,7 +108,7 @@ export function useAuth() {
 
   async function getResetPasswordLink(email: string) {
     try {
-      const response = await fetch(`${mainUrl}/api/auth/forgot-password`, {
+      const response = await fetch(`${mainUrl}/auth/forgot-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -129,7 +129,7 @@ export function useAuth() {
   async function resetPassword(resetToken: string, password: string) {
     try {
       const response = await fetch(
-        `${mainUrl}/api/auth/reset-password/${resetToken}`,
+        `${mainUrl}/auth/reset-password/${resetToken}`,
         {
           method: "POST",
           headers: {

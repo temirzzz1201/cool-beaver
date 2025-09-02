@@ -4,9 +4,10 @@ import { OrdersService } from './orders.service';
 import { OrdersController } from './orders.controller';
 import { Order } from './order.model';
 import { User } from 'src/users/user.model';
+import { MailModule } from 'src/mailer/mail.module';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Order, User])],
+  imports: [SequelizeModule.forFeature([Order, User]), MailModule],
   controllers: [OrdersController],
   providers: [OrdersService],
   exports: [OrdersService],

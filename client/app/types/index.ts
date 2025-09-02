@@ -37,12 +37,16 @@ export interface TabsItems {
   id: number;
   label: TabLabel;
   icon: string;
+  slot?: string;
 }
 
 export enum TabLabel {
   Chart = "График",
   Create = "Создать статью",
   Update = "Обновить/Удалить статью",
+  Profile = "Профиль",
+  MyOrders = "Мои заказы",
+  CreateOrder = "Создать заказ",
 }
 
 export interface MapPoints {

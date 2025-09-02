@@ -46,7 +46,7 @@ const isTableDataLoading = ref(false);
 const fetchArticles = async () => {
   try {
     isTableDataLoading.value = true;
-    const response = await fetch(`${mainUrl}/api/articles`);
+    const response = await fetch(`${mainUrl}/articles`);
     const data = await response.json();
     tableDataArray.value = data;
   } catch (error) {
@@ -63,7 +63,7 @@ onMounted(() => {
 const updateArticle = async (article: Article) => {
   try {
     const { id, createdAt, updatedAt, ...updateData } = article;
-    await fetch(`${mainUrl}/api/articles/update/${id}`, {
+    await fetch(`${mainUrl}/articles/update/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const deleteArticle = async (id: number) => {
     const confirmed = confirm("Вы точно хотите удалить статью?");
     if (!confirmed) return;
 
-    await fetch(`${mainUrl}/api/articles/delete/${id}`, {
+    await fetch(`${mainUrl}/articles/delete/${id}`, {
       method: "DELETE",
     });
 

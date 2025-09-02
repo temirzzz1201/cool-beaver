@@ -80,7 +80,7 @@ const chartOptions = {
 const getChartData = async () => {
   try {
     isLoading.value = true;
-    const res = await fetch(`${mainUrl}/api/users/all`);
+    const res = await fetch(`${mainUrl}/users/all`);
     const data: Users[] = await res.json();
     usersData.value = data;
 

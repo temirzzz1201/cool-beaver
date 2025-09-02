@@ -16,11 +16,11 @@
         {{ article.title }}
       </h2>
 
-      <!-- Фото -->
       <div v-if="article.images?.length" class="mb-2 relative">
-        <!-- Основное фото -->
         <nuxt-img
-          :src="`${mainUrl}${article.images[getActiveIndex(article.id)]?.path}`"
+          :src="`${imageUrl}${
+            article.images[getActiveIndex(article.id)]?.path
+          }`"
           alt="article image"
           class="w-full rounded-lg mb-2 object-cover aspect-[16/9]"
           loading="lazy"
@@ -28,7 +28,6 @@
           height="500"
         />
 
-        <!-- Миниатюры -->
         <div class="flex space-x-2 overflow-x-auto">
           <div
             v-for="(img, index) in article.images"
@@ -42,7 +41,7 @@
             @click.prevent="setActiveIndex(article.id, index)"
           >
             <nuxt-img
-              :src="`${mainUrl}${img.path}`"
+              :src="`${imageUrl}${img.path}`"
               alt="thumbnail"
               class="w-full h-full object-cover"
               loading="lazy"
@@ -50,7 +49,6 @@
           </div>
         </div>
 
-        <!-- Бейдж количества -->
         <u-badge
           class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-full transition-colors duration-200 group-hover:bg-black/50 group-hover:text-yellow-300"
         >
@@ -58,7 +56,6 @@
         </u-badge>
       </div>
 
-      <!-- Контент -->
       <p class="flex-1 text-gray-600 dark:text-gray-400 line-clamp-3 mb-3">
         {{ article.content }}
       </p>

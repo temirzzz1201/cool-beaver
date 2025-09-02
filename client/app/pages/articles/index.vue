@@ -29,7 +29,7 @@
 
   <client-only>
     <div v-if="total > limit" class="flex justify-center my-10">
-      <UPagination
+      <u-pagination
         v-model:page="page"
         :items-per-page="limit"
         :total="total"
@@ -51,7 +51,7 @@ const total = ref(0);
 const articles = ref<Article[]>([]);
 
 async function loadArticles() {
-  const res: any = await $fetch(`${mainUrl}/api/articles/paginated`, {
+  const res: any = await $fetch(`${mainUrl}/articles/paginated`, {
     params: { page: page.value, limit },
   });
   articles.value = res.data;

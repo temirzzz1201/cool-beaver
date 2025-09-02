@@ -4,14 +4,14 @@ import { useMainStore } from "#imports";
 import { storeToRefs } from "#imports";
 const store = useMainStore();
 
-const { tabsItems } = storeToRefs(store);
+const { adminTabsItems } = storeToRefs(store);
 </script>
 
 <template>
   <u-tabs
     orientation="vertical"
     variant="link"
-    :items="tabsItems"
+    :items="adminTabsItems"
     class="w-full h-[400px] text-white"
   >
     <template #content="{ item }">
@@ -21,7 +21,7 @@ const { tabsItems } = storeToRefs(store);
           <app-article-creator />
         </div>
         <div v-else-if="item.label === TabLabel.Update">
-          <app-article-updater />
+          <app-article-table />
         </div>
       </section>
     </template>
