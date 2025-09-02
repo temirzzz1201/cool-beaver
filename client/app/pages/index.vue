@@ -41,7 +41,7 @@
       Почему выбирают нас
     </h2>
     <div class="grid sm:grid-cols-2 gap-6">
-      <AppFeatureCard
+      <app-feature-card
         v-for="benefit in appFeatureBenefitsArray"
         :key="benefit.id"
         :icon="benefit.icon"

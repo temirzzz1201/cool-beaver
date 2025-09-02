@@ -18,13 +18,19 @@
           href="mailto:name@email.com"
           class="text-[14px] dark:text-white font-bold mr-2"
         >
-          ✉️ name@email.com
+          <div class="flex items-center">
+            <u-icon name="i-lucide-mail" class="w-4 h-4 text-gray-500 mr-2" />
+            name@email.com
+          </div>
         </u-link>
         <u-link
           href="tel:+790000000"
           class="text-[14px] font-bold dark:text-white"
         >
-          тел: 8 900 000 00 00
+          <div class="flex items-center">
+            <u-icon name="i-lucide-phone" class="w-4 h-4 text-gray-500 mr-2" />
+            8 900 000 00 00
+          </div>
         </u-link>
       </div>
     </header>
