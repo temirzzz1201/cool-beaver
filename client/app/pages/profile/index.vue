@@ -1,11 +1,8 @@
 <template>
   <client-only>
-    <h1 class="mt-26 text-1xl underline">
-      Добро пожаловать {{ user?.name }} !
-    </h1>
+    <h1 class="mt-26 text-1xl">Добро пожаловать {{ user?.name }} !</h1>
     <section class="max-w-4xl mx-auto py-10">
       <h1 class="text-3xl font-bold mb-6">Личный кабинет</h1>
-
       <u-tabs :items="profileTabsItems" class="w-full">
         <template #profile>
           <div class="space-y-4">

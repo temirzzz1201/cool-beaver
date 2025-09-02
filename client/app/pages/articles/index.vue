@@ -13,8 +13,15 @@
   </section>
 
   <section
+    v-if="loading"
+    class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-4 mb-14"
+  >
+    <app-articles-card-skeleton :count="limit" />
+  </section>
+
+  <section
     v-if="articles.length > 0"
-    class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-6 mb-14"
+    class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-4 mb-14"
   >
     <app-articles-card :articles="articles" />
   </section>
@@ -49,13 +56,19 @@ const page = ref(1);
 const limit = 10;
 const total = ref(0);
 const articles = ref<Article[]>([]);
+const loading = ref(true);
 
 async function loadArticles() {
-  const res: any = await $fetch(`${mainUrl}/articles/paginated`, {
-    params: { page: page.value, limit },
-  });
-  articles.value = res.data;
-  total.value = res.total;
+  loading.value = true;
+  try {
+    const res: any = await $fetch(`${mainUrl}/articles/paginated`, {
+      params: { page: page.value, limit },
+    });
+    articles.value = res.data;
+    total.value = res.total;
+  } finally {
+    loading.value = false;
+  }
 }
 
 watch(page, loadArticles, { immediate: true });

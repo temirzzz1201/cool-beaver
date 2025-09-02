@@ -13,7 +13,9 @@
     >
       <slot></slot>
       <u-separator />
-      <div class="h-[30px] hidden md:flex md:items-center md:justify-end pr-4">
+      <div
+        class="w-full max-w-[1920px] h-[30px] hidden md:flex md:items-center md:justify-end px-4 mr-auto ml-auto"
+      >
         <u-link
           href="mailto:name@email.com"
           class="text-[14px] dark:text-white font-bold mr-2"

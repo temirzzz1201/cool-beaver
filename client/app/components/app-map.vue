@@ -1,5 +1,11 @@
 <template>
-  <div id="map" class="map-container"></div>
+  <div class="relative w-full h-[500px]">
+    <div id="map" class="map-container w-full h-[500px]"></div>
+    <app-spinner
+      v-if="loading"
+      class="absolute top-0 right-0 bottom-0 left-0 bg-blue-200 inset-0 z-30"
+    />
+  </div>
 </template>
 
 <script setup>
@@ -8,13 +14,19 @@ import { onMounted } from "vue";
 import L from "leaflet";
 
 const store = useMainStore();
+const loading = ref(true);
 
 onMounted(() => {
   const map = L.map("map").setView([45.039808, 38.976454], 11);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "",
-  }).addTo(map);
+  })
+    .on("load", () => {
+      // когда тайлы подгрузились — убираем спинер
+      loading.value = false;
+    })
+    .addTo(map);
 
   store.contactsMapPoints.forEach((point) => {
     L.marker([point.lat, point.lng]).addTo(map).bindPopup(point.name);
@@ -24,10 +36,3 @@ onMounted(() => {
   flag.style.display = "none";
 });
 </script>
-
-<style scoped>
-.map-container {
-  width: 100%;
-  height: 500px;
-}
-</style>
