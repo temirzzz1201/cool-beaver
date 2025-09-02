@@ -33,9 +33,7 @@
 <script setup lang="ts">
 import { useAuth } from "~/composables/useAuth";
 
-definePageMeta({
-  middleware: "auth",
-});
+definePageMeta({ middleware: ["auth-admin"] });
 
 const { user, logout, isAdmin } = useAuth();
 

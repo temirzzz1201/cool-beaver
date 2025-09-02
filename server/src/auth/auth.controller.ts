@@ -36,6 +36,7 @@ export class AuthController {
   @Get('me')
   async getProfile(@Req() req: Request & { user: any }) {
     const user = await this.usersService.findById(req.user.id);
+
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }

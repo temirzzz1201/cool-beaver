@@ -31,7 +31,7 @@ export function useAuth() {
 
       const data = await res.json();
       token.value = data.access_token;
-      user.value = data.user;
+      await fetchUser();
 
       if (import.meta.client) {
         localStorage.setItem("token", token.value ?? "");
@@ -84,6 +84,7 @@ export function useAuth() {
       user.value = data;
 
       token.value = storedToken;
+      return user.value;
     } catch (error) {
       logout();
       throw new Error(`Fetch user error: ${error}`);

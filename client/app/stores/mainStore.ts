@@ -27,6 +27,11 @@ export const useMainStore = defineStore("mainStore", () => {
     {
       id: 4,
       title: "Личный кабинет",
+      link: "/profile",
+    },
+      {
+      id: 5,
+      title: "Авторизация",
       link: "/login",
     },
   ]);

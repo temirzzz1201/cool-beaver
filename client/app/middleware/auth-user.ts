@@ -1,20 +1,21 @@
-import { defineNuxtRouteMiddleware, navigateTo } from "#app";
-import { useAuth } from "~/composables/useAuth";
-
-export default defineNuxtRouteMiddleware(async () => {
+export default defineNuxtRouteMiddleware(async (to) => {
   if (import.meta.server) return;
 
   const { fetchUser, token, user, isAdmin } = useAuth();
 
   if (token.value && !user.value) {
-    await fetchUser();
+    try {
+      await fetchUser();
+    } catch {
+      return navigateTo("/login");
+    }
   }
 
   if (!user.value) {
     return navigateTo("/login");
   }
 
-  if (isAdmin()) {
+  if (isAdmin() && to.path !== "/admin") {
     return navigateTo("/admin");
   }
 });

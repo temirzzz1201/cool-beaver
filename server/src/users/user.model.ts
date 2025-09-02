@@ -6,7 +6,9 @@ import {
   PrimaryKey,
   AutoIncrement,
   Default,
+  HasMany,
 } from 'sequelize-typescript';
+import { Order } from 'src/order/order.model';
 
 @Table({ tableName: 'users', timestamps: false })
 export class User extends Model<User> {
@@ -48,4 +50,7 @@ export class User extends Model<User> {
     allowNull: true,
   })
   declare resetPasswordExpires: number | null;
+
+  @HasMany(() => Order)
+  declare orders: Order[];
 }
