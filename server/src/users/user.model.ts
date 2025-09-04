@@ -22,6 +22,12 @@ export class User extends Model<User> {
   })
   declare name: string;
 
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  declare phone: string;
+
   @Column({ unique: true, allowNull: false })
   declare email: string;
 

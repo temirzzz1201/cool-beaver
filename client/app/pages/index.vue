@@ -16,7 +16,7 @@
 
   <section class="mb-14 max-w-[1920px] mx-auto text-left">
     <h2 class="text-2xl text-gray-700 font-semibold mb-8">Чем мы занимаемся</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-3">
       <AppFeatureCard
         v-for="service in appFeatureServicesArray"
         :key="service.id"
@@ -31,7 +31,7 @@
     <h2 class="text-2xl text-gray-700 font-semibold mb-6 text-left">
       Полезные материалы
     </h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 gap-3 md:gap-3">
       <app-articles-card v-if="lastArticles" :articles="lastArticles" />
     </div>
   </section>
@@ -40,7 +40,7 @@
     <h2 class="text-2xl text-gray-700 font-semibold mb-6">
       Почему выбирают нас
     </h2>
-    <div class="grid sm:grid-cols-2 gap-6">
+    <div class="grid sm:grid-cols-2 gap-3 md:gap-3">
       <app-feature-card
         v-for="benefit in appFeatureBenefitsArray"
         :key="benefit.id"

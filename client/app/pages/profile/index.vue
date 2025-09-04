@@ -1,19 +1,27 @@
 <template>
   <client-only>
-    <h1 class="mt-26 text-1xl">Добро пожаловать {{ user?.name }} !</h1>
+    <h1 class="mt-26 text-2xl font-bold text-gray-700">
+      Добро пожаловать {{ user?.name }} !
+    </h1>
     <section class="max-w-4xl mx-auto py-10">
-      <h1 class="text-3xl font-bold mb-6">Личный кабинет</h1>
       <u-tabs :items="profileTabsItems" class="w-full">
         <template #profile>
           <div class="space-y-4">
-            <p><b>Имя:</b> {{ user?.name }}</p>
-            <p><b>Email:</b> {{ user?.email }}</p>
-            <p><b>Дата регистрации:</b> {{ formatDate(user?.creationDate) }}</p>
+            <p class="text-gray-600 font-bold">Имя: {{ user?.name }}</p>
+            <p class="text-gray-600 font-bold">Email: {{ user?.email }}</p>
+            <p class="text-gray-600 font-bold">
+              Дата регистрации: {{ formatDate(user?.creationDate) }}
+            </p>
             <u-button @click="logout" color="error">Выйти</u-button>
           </div>
         </template>
 
         <template #orders>
+          <p
+            class="text-lg md:text-2xl mb-12 mt-4 max-w-[540px] text-gray-600 font-bold"
+          >
+            История ваших заказов
+          </p>
           <div v-if="orders?.length" class="space-y-4">
             <u-card
               v-for="order in paginatedOrders"
@@ -22,8 +30,8 @@
             >
               <h3 class="font-semibold text-lg">{{ order.title }}</h3>
               <p class="text-gray-600">{{ order.description }}</p>
-              <p class="text-sm text-gray-500">
-                Статус: <b>{{ order.status }}</b> —
+              <p class="text-sm text-gray-500 font-bold">
+                Статус: {{ order.status }} —
                 {{ formatDate(order.createdAt) }}
               </p>
             </u-card>
@@ -43,20 +51,38 @@
         </template>
 
         <template #create>
-          <app-form
-            :schema="schema"
-            :state="state"
-            @submit="createOrder"
-            class="mb-4"
-          >
-            <u-form-field label="Название заказа" name="title">
-              <u-input v-model="state.title" class="min-w-[320px]" />
-            </u-form-field>
+          <div class="flex flex-col items-center">
+            <p
+              class="text-lg md:text-2xl mb-12 mt-4 max-w-[540px] text-gray-600 font-bold text-center"
+            >
+              Здесь вы&nbsp;можете офрмить свой заказ и&nbsp;мы&nbsp;обязательно
+              свяжимся с&nbsp;вами!
+            </p>
+            <app-form
+              :schema="schema"
+              :state="state"
+              @submit="createOrder"
+              class="mb-8"
+              button-title="создать заказ"
+            >
+              <u-form-field label="Название заказа" name="title">
+                <u-input v-model="state.title" class="min-w-[320px]" />
+              </u-form-field>
 
-            <u-form-field label="Описание" name="description">
-              <u-textarea v-model="state.description" class="min-w-[320px]" />
-            </u-form-field>
-          </app-form>
+              <u-form-field label="Номер для связи" name="phone">
+                <input
+                  v-model="state.phone"
+                  placeholder="+7 (___) ___-__-__"
+                  class="min-w-[320px] bg-white h-[32px] px-1.5 rounded"
+                  type="tel"
+                  v-inputmask="{ mask: '+7 (999) 999-99-99' }"
+                />
+              </u-form-field>
+              <u-form-field label="Описание" name="description">
+                <u-textarea v-model="state.description" class="min-w-[320px]" />
+              </u-form-field>
+            </app-form>
+          </div>
         </template>
       </u-tabs>
     </section>
@@ -89,6 +115,13 @@ const paginatedOrders = computed(() =>
 
 const schema = v.object({
   title: v.string("Введите заголовок"),
+  phone: v.pipe(
+    v.string(),
+    v.regex(
+      /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/,
+      "Введите корректный номер телефона"
+    )
+  ),
   description: v.pipe(
     v.string(),
     v.minLength(8, "Описание должно быть минимум 8 символов")
@@ -97,6 +130,7 @@ const schema = v.object({
 
 const state = reactive({
   title: "",
+  phone: "",
   description: "",
 });
 
@@ -112,8 +146,7 @@ const createOrder = async () => {
     body: { ...state },
   });
 
-  state.title = "";
-  state.description = "";
+  Object.assign(state, { title: "", phone: "", description: "" });
   await fetchOrders();
 };
 

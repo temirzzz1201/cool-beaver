@@ -39,6 +39,12 @@ export class Order extends Model<Order, OrderCreationAttributes> {
   declare title: string;
 
   @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  declare phone: string;
+
+  @Column({
     type: DataType.TEXT,
     allowNull: true,
   })

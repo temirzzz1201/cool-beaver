@@ -7,7 +7,7 @@
   >
     <u-form-field label="Заголовок" name="title">
       <u-input
-        placeholder="Заголовок..."
+        placeholder="Заголовок статьи..."
         v-model="state.title"
         class="w-full"
       />
@@ -23,11 +23,21 @@
       />
     </u-form-field>
 
-    <u-form-field label="Изображения" name="images">
-      <input type="file" multiple @change="handleFiles" />
+    <u-form-field
+      label="Выбирете изображения (до 5ти включительно)"
+      name="images"
+    >
+      <input
+        class="bg-blue-500 py-3 px-4"
+        type="file"
+        multiple
+        @change="handleFiles"
+        accept=".jpg,.jpeg,.png,.webp"
+        id="files"
+      />
     </u-form-field>
 
-    <u-button type="submit">Создать</u-button>
+    <u-button type="submit">Создать статью</u-button>
   </u-form>
 </template>
 

@@ -7,8 +7,8 @@
     v-if="props.articles?.length > 0"
   >
     <div
-      class="flex flex-col h-full rounded-xl shadow-sm overflow-hidden transition hover:shadow-md relative p-3"
-      :class="props.isDetail ? 'max-w-full' : 'max-w-[350px]'"
+      class="flex flex-col min-h-[300px] h-full rounded-xl shadow-sm overflow-hidden transition hover:shadow-md relative p-3 bg-white"
+      :class="props.isDetail ? 'max-w-full' : 'max-w-[500px]'"
       variant="subtle"
     >
       <h2
@@ -62,10 +62,10 @@
       >
         {{ article.content }}
       </p>
-      <u-separator class="mb-3" />
+      <u-separator class="mb-2" />
       <small
         v-if="article.createdAt"
-        class="text-xs text-gray-500 dark:text-gray-400"
+        class="flex h-[30px] items-center text-xs text-gray-500 dark:text-gray-400"
       >
         {{ formatDate(article.createdAt) }}
       </small>

@@ -7,9 +7,19 @@
       :state="state"
       @submit="handleSubmit"
       class="mb-4"
+      button-title="Зарегестрироваться"
     >
       <u-form-field label="Имя" name="name">
         <u-input v-model="state.name" class="min-w-[320px]" />
+      </u-form-field>
+      <u-form-field label="Номер" name="phone">
+        <input
+          v-model="state.phone"
+          placeholder="+7 (___) ___-__-__"
+          class="min-w-[320px] bg-white h-[32px] px-1.5 rounded"
+          type="tel"
+          v-inputmask="{ mask: '+7 (999) 999-99-99' }"
+        />
       </u-form-field>
       <u-form-field label="Почта" name="email">
         <u-input v-model="state.email" type="email" class="min-w-[320px]" />
@@ -46,6 +56,13 @@ import { useAuth } from "~/composables/useAuth";
 
 const schema = v.object({
   name: v.pipe(v.string(), v.minLength(4, "Минимум 4 символа")),
+  phone: v.pipe(
+    v.string(),
+    v.regex(
+      /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/,
+      "Введите корректный номер телефона"
+    )
+  ),
   email: v.pipe(v.string(), v.email("Неверный email")),
   password: v.pipe(v.string(), v.minLength(8, "Минимум 8 символов")),
 });
@@ -56,6 +73,7 @@ type Schema = v.InferOutput<typeof schema>;
 
 const state = reactive({
   name: "",
+  phone: "",
   email: "",
   password: "",
 });
@@ -63,7 +81,12 @@ const state = reactive({
 const toast = useToast();
 async function handleSubmit(event: FormSubmitEvent<Schema>) {
   try {
-    await register(event.data.name, event.data.email, event.data.password);
+    await register(
+      event.data.name,
+      event.data.phone,
+      event.data.email,
+      event.data.password
+    );
     if (event.data.email.length) {
       toast.add({
         title: "Отлично",
@@ -71,6 +94,7 @@ async function handleSubmit(event: FormSubmitEvent<Schema>) {
         color: "success",
       });
     }
+    Object.assign(state, { name: "", phone: "", email: "", password: "" });
   } catch (e: any) {
     toast.add({
       title: "Ошибка",

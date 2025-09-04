@@ -6,6 +6,7 @@
       :schema="schema"
       :state="state"
       @submit="handleSubmit"
+      button-title="Войти"
       class="mb-4"
     >
       <u-form-field label="Почта" name="email">

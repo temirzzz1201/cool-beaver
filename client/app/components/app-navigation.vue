@@ -21,9 +21,8 @@
       </li>
       <client-only v-if="!colorMode?.forced">
         <u-button
-          class="ml-4"
+          class="ml-4 cursor-pointer text-amber-300"
           :icon="isDark ? 'i-lucide-moon' : 'i-lucide-sun'"
-          color="neutral"
           variant="ghost"
           @click="isDark = !isDark"
         />

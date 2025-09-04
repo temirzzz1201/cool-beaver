@@ -22,6 +22,7 @@ export class OrdersService {
     const orderText = `
     Новый заказ:
     Название: ${dto.title}
+    Номер заказчика: ${dto.phone}
     Описание: ${dto.description || '-'}
     Статус: pending
     `;
@@ -30,6 +31,7 @@ export class OrdersService {
       <div style="font-family: Arial, sans-serif; line-height: 1.5; color: #333;">
         <h2 style="color:#444;">Новый заказ</h2>
         <p><b>Название:</b> ${dto.title}</p>
+        <p><b>Номер заказчика: ${dto.phone}</p>
         <p><b>Описание:</b> ${dto.description || '-'}</p>
         <hr style="border:0;border-top:1px solid #ddd;margin:20px 0;" />
         <p><b>Статус:</b> pending</p>

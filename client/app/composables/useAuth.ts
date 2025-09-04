@@ -43,12 +43,17 @@ export function useAuth() {
     }
   }
 
-  async function register(name: string, email: string, password: string) {
+  async function register(
+    name: string,
+    phone: string,
+    email: string,
+    password: string
+  ) {
     try {
       const res = await fetch(`${mainUrl}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, phone, email, password }),
       });
 
       if (!res.ok) throw new Error("Registration failed");

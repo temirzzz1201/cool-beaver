@@ -7,7 +7,7 @@
   >
     <slot></slot>
     <u-button color="secondary" type="submit" class="cursor-pointer">
-      Отправить
+      {{ buttonTitle || "Отправить" }}
     </u-button>
   </u-form>
 </template>
@@ -17,8 +17,9 @@ const emit = defineEmits<{
   (e: "submit", payload: any): void;
 }>();
 
-const props = defineProps<{
+defineProps<{
   schema: any;
   state: Record<string, any>;
+  buttonTitle: string;
 }>();
 </script>

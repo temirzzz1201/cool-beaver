@@ -5,14 +5,18 @@ import {
   IsPhoneNumber,
 } from 'class-validator';
 
-export class CreateOrderDto {
+export class ContactDto {
   @IsNotEmpty()
   @IsString()
-  readonly title: string;
+  readonly name: string;
 
   @IsNotEmpty()
   @IsPhoneNumber('RU')
   readonly phone: string;
+
+  @IsOptional()
+  @IsString()
+  readonly email?: string;
 
   @IsOptional()
   @IsString()

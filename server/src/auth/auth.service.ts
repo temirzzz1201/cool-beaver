@@ -12,10 +12,15 @@ export class AuthService {
     private mailService: MailService,
   ) {}
 
-  async register(name: string, email: string, password: string) {
+  async register(name: string, phone: string, email: string, password: string) {
     const existing = await this.usersService.findByEmail(email);
     if (existing) throw new Error('User already exists');
-    const user = await this.usersService.create({ name, email, password });
+    const user = await this.usersService.create({
+      name,
+      phone,
+      email,
+      password,
+    });
     return this.createToken(user);
   }
 

@@ -23,8 +23,21 @@ export class AuthController {
   ) {}
 
   @Post('register')
-  register(@Body() body: { name: string; email: string; password: string }) {
-    return this.authService.register(body.name, body.email, body.password);
+  register(
+    @Body()
+    body: {
+      name: string;
+      phone: string;
+      email: string;
+      password: string;
+    },
+  ) {
+    return this.authService.register(
+      body.name,
+      body.phone,
+      body.email,
+      body.password,
+    );
   }
 
   @Post('login')
