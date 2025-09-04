@@ -13,7 +13,9 @@
             >
           </p>
         </div>
-        <u-button class="ml-6 h-[36px]" @click="logout">Выйти</u-button>
+        <u-button class="ml-6 h-[36px] cursor-pointer" @click="logout"
+          >Выйти</u-button
+        >
       </div>
       <u-separator class="mb-10" />
     </section>

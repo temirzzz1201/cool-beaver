@@ -9,10 +9,10 @@
   >
     <header
       v-show="visible"
-      class="fixed top-0 left-0 w-full z-50 bg-blue-200 dark:bg-gray-900 text-gray-600 backdrop-blur-sm shadow-md"
+      class="absolute top-0 left-0 w-full z-100 bg-blue-500 dark:bg-gray-800 text-gray-600 backdrop-blur-sm shadow-md"
     >
       <slot></slot>
-      <u-separator />
+      <u-separator color="neutral" />
       <div
         class="w-full max-w-[1920px] h-[30px] hidden md:flex md:items-center md:justify-end px-4 mr-auto ml-auto"
       >
@@ -20,8 +20,8 @@
           href="mailto:name@email.com"
           class="text-[14px] dark:text-white font-bold mr-2"
         >
-          <div class="flex items-center">
-            <u-icon name="i-lucide-mail" class="w-4 h-4 text-gray-500 mr-2" />
+          <div class="flex items-center text-gray-100 dark:text-white">
+            <u-icon name="i-lucide-mail" class="w-4 h-4 mr-2" />
             name@email.com
           </div>
         </u-link>
@@ -29,8 +29,8 @@
           href="tel:+790000000"
           class="text-[14px] font-bold dark:text-white"
         >
-          <div class="flex items-center">
-            <u-icon name="i-lucide-phone" class="w-4 h-4 text-gray-500 mr-2" />
+          <div class="flex items-center text-gray-100 dark:text-white">
+            <u-icon name="i-lucide-phone" class="w-4 h-4 mr-2" />
             8 900 000 00 00
           </div>
         </u-link>

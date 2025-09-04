@@ -1,15 +1,16 @@
 <template>
-  <section
-    class="max-w-[1920px] mx-auto dark:bg-gray-900 dark:text-white mt-32 max-[768px]:mt-20"
-  >
-    <header class="mb-8 text-center">
-      <h1 class="text-3xl text-gray-700 font-bold">Выполненные работы</h1>
-      <p class="mt-3 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-        Здесь вы&nbsp;можете увидеть примеры выполненных нами работ.
-        Мы&nbsp;ценим качество, скорость и&nbsp;ответственность при каждом
-        заказе.
-      </p>
-    </header>
+  <section class="max-w-[1920px] mx-auto mt-32 mb-14 max-[768px]:mt-20">
+    <h1
+      class="text-3xl text-gray-800 dark:text-white font-bold text-center mb-8"
+    >
+      Выполненные работы
+    </h1>
+    <p
+      class="text-center text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mt-3"
+    >
+      Здесь вы&nbsp;можете увидеть примеры выполненных нами работ. Мы&nbsp;ценим
+      качество, скорость и&nbsp;ответственность при каждом заказе.
+    </p>
   </section>
 
   <section

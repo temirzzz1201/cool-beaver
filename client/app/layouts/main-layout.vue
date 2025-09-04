@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex flex-col min-h-screen bg-blue-50 text-black dark:bg-gray-900 dark:text-white"
-  >
+  <div class="flex flex-col min-h-screen bg-blue-50 dark:bg-gray-600">
     <app-header>
       <app-navigation />
     </app-header>

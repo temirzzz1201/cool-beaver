@@ -50,6 +50,7 @@ const chartData: Ref<{
     {
       label: "Количество зарегестрированых пользователей",
       backgroundColor: "#42A5F5",
+
       data: [],
     },
   ],

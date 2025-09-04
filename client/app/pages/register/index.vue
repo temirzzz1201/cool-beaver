@@ -16,7 +16,7 @@
         <input
           v-model="state.phone"
           placeholder="+7 (___) ___-__-__"
-          class="min-w-[320px] bg-white h-[32px] px-1.5 rounded"
+          class="min-w-[320px] bg-white h-[32px] px-1.5 rounded dark:bg-gray-900"
           type="tel"
           v-inputmask="{ mask: '+7 (999) 999-99-99' }"
         />
