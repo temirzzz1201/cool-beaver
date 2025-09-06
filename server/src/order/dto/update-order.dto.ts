@@ -10,6 +10,9 @@ export class UpdateOrderDto {
   readonly description?: string;
 
   @IsOptional()
+  images?: string[];
+
+  @IsOptional()
   @IsIn(['new', 'in_progress', 'done', 'canceled'])
   readonly status?: 'new' | 'in_progress' | 'done' | 'canceled';
 }

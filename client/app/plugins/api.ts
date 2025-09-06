@@ -1,8 +1,7 @@
 import { useAuth } from "#imports";
 
-const { token } = useAuth();
-
 export default defineNuxtPlugin(() => {
+  const { token } = useAuth();
   const api = $fetch.create({
     baseURL: `${mainUrl}`,
 

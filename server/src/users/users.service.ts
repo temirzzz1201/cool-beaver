@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { User } from './user.model';
 import * as bcrypt from 'bcrypt';
 import { UsersDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -33,8 +34,6 @@ export class UsersService {
     const role = existingAdmin ? 'user' : 'admin';
     const hash = await bcrypt.hash(password, 10);
 
-    console.log('phone aaaaaaaaaaaaaaaaaaaaaaaaa ', phone);
-
     const isAdmin = !existingAdmin;
     const phoneToSave = isAdmin ? '0000000000' : phone;
 
@@ -56,5 +55,37 @@ export class UsersService {
 
   async findAll(): Promise<User[]> {
     return this.userModel.findAll();
+  }
+
+  async update(id: number, userId: number, dto: UpdateUserDto): Promise<User> {
+    const user = await this.findById(id.toString());
+    if (!user) {
+      throw new Error(`Пользователь с id=${id} не найден`);
+    }
+
+    if (userId !== id) {
+      const requester = await this.findById(userId.toString());
+      if (!requester || requester.role !== 'admin') {
+        throw new Error('Нет прав для этого действия');
+      }
+    }
+
+    return await user.update(dto as any);
+  }
+
+  async remove(id: number, userId: number): Promise<void> {
+    const user = await this.findById(id.toString());
+    if (!user) {
+      throw new Error(`Пользователь с id=${id} не найден`);
+    }
+
+    if (userId !== id) {
+      const requester = await this.findById(userId.toString());
+      if (!requester || requester.role !== 'admin') {
+        throw new Error('Нет прав для этого действия');
+      }
+    }
+
+    await user.destroy();
   }
 }

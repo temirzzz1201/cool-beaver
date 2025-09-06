@@ -7,9 +7,7 @@
       v-model:pagination="pagination"
       :data="tableDataArray || []"
       :columns="columns"
-      :pagination-options="{
-        getPaginationRowModel: getPaginationRowModel(),
-      }"
+      :pagination-options="{ getPaginationRowModel: getPaginationRowModel() }"
       class="flex-1"
       :loading="isTableDataLoading"
       loading-color="primary"
@@ -36,42 +34,55 @@ import { getPaginationRowModel } from "@tanstack/vue-table";
 import { h, resolveComponent } from "vue";
 import type { TableColumn } from "@nuxt/ui";
 import type { Column } from "@tanstack/vue-table";
-import { type Article } from "~/types";
+import type { Users } from "~/types";
 
 const table = useTemplateRef("table");
 const UButton = resolveComponent("UButton");
 const UDropdownMenu = resolveComponent("UDropdownMenu");
 const UInput = resolveComponent("UInput");
-const UTextarea = resolveComponent("UTextarea");
-const tableDataArray = ref<Article[]>([]);
+const tableDataArray = ref<Users[]>([]);
 const isTableDataLoading = ref(false);
 
-const fetchArticles = async () => {
+const { token } = useAuth();
+
+const fetchUsers = async () => {
+  console.log(token.value);
   try {
     isTableDataLoading.value = true;
-    const response = await fetch(`${mainUrl}/articles`);
-    const data = await response.json();
-    console.log("table data ", data);
 
+    const response = await fetch(`${mainUrl}/users/all`, {
+      headers: {
+        Authorization: `Bearer ${token.value}`,
+      },
+    });
+    const data = await response.json();
     tableDataArray.value = data;
   } catch (error) {
-    throw new Error(`Ошибка получения статей: ${error}`);
+    console.error("Ошибка получения пользователей:", error);
   } finally {
     isTableDataLoading.value = false;
   }
 };
 
 onMounted(() => {
-  fetchArticles();
+  fetchUsers();
 });
 
-const updateArticle = async (article: Article) => {
+const updateUser = async (user: Users) => {
   try {
-    const { id, createdAt, updatedAt, images, ...updateData } = article;
-    await fetch(`${mainUrl}/articles/${id}`, {
+    const {
+      id,
+      password,
+      role,
+      resetPasswordToken,
+      resetPasswordExpires,
+      ...updateData
+    } = user;
+    await fetch(`${mainUrl}/users/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token.value}`,
       },
       body: JSON.stringify(updateData),
     });
@@ -80,82 +91,71 @@ const updateArticle = async (article: Article) => {
   }
 };
 
-const deleteArticle = async (id: number) => {
+const deleteUser = async (id: number) => {
   try {
-    const confirmed = confirm("Вы точно хотите удалить статью?");
+    const confirmed = confirm("Удалить пользователя?");
     if (!confirmed) return;
 
-    await fetch(`${mainUrl}/articles/${id}`, {
+    await fetch(`${mainUrl}/users/${id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token.value}`,
+      },
     });
-
-    tableDataArray.value = tableDataArray.value.filter((a) => a.id !== id);
+    tableDataArray.value = tableDataArray.value.filter(
+      (v: Users) => v.id !== id
+    );
   } catch (error) {
     console.error("Ошибка удаления:", error);
   }
 };
 
-const columns: TableColumn<Article>[] = [
+const columns: TableColumn<Users>[] = [
   {
     accessorKey: "id",
     header: "#id",
     cell: ({ row }) => `#${row.getValue("id")}`,
   },
-
   {
-    accessorKey: "title",
-    header: ({ column }) => getHeader(column, "Заголовок Статьи"),
+    accessorKey: "name",
+    header: ({ column }) => getHeader(column, "Имя"),
     cell: ({ row }) => {
-      const article = row.original;
+      const user = row.original;
       return h(UInput, {
-        modelValue: article.title,
+        modelValue: user.name,
         "onUpdate:modelValue": async (value: string) => {
-          article.title = value;
-          await updateArticle(article);
+          user.name = value;
+          await updateUser(user);
         },
       });
     },
   },
   {
-    accessorKey: "content",
-    header: ({ column }) => getHeader(column, "Контент"),
-    cell: ({ row }) => {
-      const article = row.original;
-      return h(UTextarea, {
-        modelValue: article.content,
-        autoresize: true,
-        "onUpdate:modelValue": async (value: string) => {
-          article.content = value;
-          await updateArticle(article);
-        },
-      });
-    },
+    accessorKey: "email",
+    header: ({ column }) => getHeader(column, "Email"),
+    cell: ({ row }) => row.getValue("email"),
   },
   {
-    accessorKey: "createdAt",
-    header: ({ column }) => getHeader(column, "Создано"),
-
-    cell: ({ row }) => `${formatDate(row.getValue("createdAt"))}`,
+    accessorKey: "phone",
+    header: ({ column }) => getHeader(column, "Телефон"),
+    cell: ({ row }) => row.getValue("phone"),
   },
   {
-    accessorKey: "updatedAt",
-    header: ({ column }) => getHeader(column, "Обновлено"),
-
-    cell: ({ row }) => `${formatDate(row.getValue("updatedAt"))}`,
+    accessorKey: "role",
+    header: "Роль",
+    cell: ({ row }) => row.getValue("role"),
   },
   {
     id: "actions",
     header: "Действия",
-    cell: ({ row }) => {
-      const article = row.original;
-      return h(UButton, {
+    cell: ({ row }) =>
+      h(UButton, {
         icon: "i-lucide-trash-2",
         color: "red",
         variant: "ghost",
-        title: "Удалить статью",
-        onClick: () => deleteArticle(article.id),
-      });
-    },
+        title: "Удалить пользователя",
+        onClick: () => deleteUser(row.original.id),
+      }),
   },
 ];
 
@@ -164,14 +164,7 @@ const pagination = ref({
   pageSize: 5,
 });
 
-const sorting = ref([
-  {
-    id: "id",
-    desc: false,
-  },
-]);
-
-function getHeader(column: Column<Article>, label: string) {
+function getHeader(column: Column<Users>, label: string) {
   const isSorted = column.getIsSorted();
 
   return h(
@@ -227,4 +220,11 @@ function getHeader(column: Column<Article>, label: string) {
       })
   );
 }
+
+const sorting = ref([
+  {
+    id: "id",
+    desc: false,
+  },
+]);
 </script>

@@ -23,6 +23,9 @@ const { adminTabsItems } = storeToRefs(store);
         <div v-else-if="item.label === TabLabel.Update">
           <app-article-table />
         </div>
+        <div v-else-if="item.label === TabLabel.Users">
+          <app-users-table />
+        </div>
       </section>
     </template>
   </u-tabs>

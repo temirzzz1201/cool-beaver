@@ -20,8 +20,9 @@ import {
   LinearScale,
 } from "chart.js";
 import { type Users } from "~/types";
-import { getRussianMonthName } from "#imports";
 import type { Ref } from "vue";
+
+const { token } = useAuth();
 
 ChartJS.register(
   Title,
@@ -81,8 +82,13 @@ const chartOptions = {
 const getChartData = async () => {
   try {
     isLoading.value = true;
-    const res = await fetch(`${mainUrl}/users/all`);
-    const data: Users[] = await res.json();
+
+    const response = await fetch(`${mainUrl}/users/all`, {
+      headers: {
+        Authorization: `Bearer ${token.value}`,
+      },
+    });
+    const data: Users[] = await response.json();
     usersData.value = data;
 
     const monthMap = new Map<string, number>();

@@ -4,7 +4,7 @@ import {
   Post,
   Body,
   Param,
-  Put,
+  Patch,
   Delete,
   Query,
   UseInterceptors,
@@ -25,7 +25,7 @@ export class ArticlesController {
   @UseInterceptors(
     FilesInterceptor('images', 5, {
       storage: diskStorage({
-        destination: '/var/www/uploads/articles',
+        destination: process.env.IMAGE_UPLOAD_DESTINATION,
         filename: (req, file, cb) => {
           const uniqueSuffix =
             Date.now() + '-' + Math.round(Math.random() * 1e9);
@@ -65,12 +65,12 @@ export class ArticlesController {
     return this.articlesService.findOne(+id);
   }
 
-  @Put('update/:id')
+  @Patch(':id')
   update(@Param('id') id: string, @Body() dto: UpdateArticleDto) {
     return this.articlesService.update(+id, dto);
   }
 
-  @Delete('delete/:id')
+  @Delete(':id')
   remove(@Param('id') id: string) {
     return this.articlesService.remove(+id);
   }

@@ -31,6 +31,9 @@ export interface Users {
   email: string;
   password?: string;
   creationDate: string;
+  role?: string;
+  resetPasswordToken?: string;
+  resetPasswordExpires?: string;
 }
 
 export interface TabsItems {
@@ -44,6 +47,7 @@ export enum TabLabel {
   Chart = "График",
   Create = "Создать статью",
   Update = "Обновить/Удалить статью",
+  Users = "Таблица пользователей",
   Profile = "Профиль",
   MyOrders = "Мои заказы",
   CreateOrder = "Создать заказ",

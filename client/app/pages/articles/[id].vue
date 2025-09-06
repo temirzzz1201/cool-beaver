@@ -1,7 +1,5 @@
 <template>
-  <section
-    class="px-4 py-8 dark:bg-gray-900 dark:text-white mt-24 max-[768px]:mt-20 mb-24"
-  >
+  <section class="px-4 py-8 dark:text-white mt-24 max-[768px]:mt-20 mb-24">
     <app-articles-card v-if="article" :articles="[article]" is-detail />
     <p v-else-if="error" class="text-red-500">Ошибка загрузки статьи</p>
     <p v-else class="text-gray-600 dark:text-gray-300">Загрузка...</p>
