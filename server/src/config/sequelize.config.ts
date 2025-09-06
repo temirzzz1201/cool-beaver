@@ -3,7 +3,7 @@ import { SequelizeModuleOptions } from '@nestjs/sequelize';
 import { User } from 'src/users/user.model';
 import { Article } from 'src/articles/article.model';
 import { ArticleImage } from 'src/articles/articles-image.model';
-import { Order } from 'src/order/order.model';
+import { Order } from 'src/orders/order.model';
 
 export const sequelizeConfig: SequelizeModuleOptions = {
   dialect: 'mysql',

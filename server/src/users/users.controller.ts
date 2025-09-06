@@ -20,7 +20,7 @@ export class UsersController {
 
   @Get('all')
   findAll() {
-    return this.usersService.findAll();
+    return this.usersService.findAll({ excludeRole: 'admin' });
   }
 
   @Patch(':id')

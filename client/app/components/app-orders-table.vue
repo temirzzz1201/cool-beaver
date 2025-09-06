@@ -36,20 +36,24 @@ import { getPaginationRowModel } from "@tanstack/vue-table";
 import { h, resolveComponent } from "vue";
 import type { TableColumn } from "@nuxt/ui";
 import type { Column } from "@tanstack/vue-table";
-import { type Article } from "~/types";
+import { type Order } from "~/types";
 
 const table = useTemplateRef("table");
 const UButton = resolveComponent("UButton");
 const UDropdownMenu = resolveComponent("UDropdownMenu");
-const UInput = resolveComponent("UInput");
-const UTextarea = resolveComponent("UTextarea");
-const tableDataArray = ref<Article[]>([]);
+const tableDataArray = ref<Order[]>([]);
 const isTableDataLoading = ref(false);
 
-const fetchArticles = async () => {
+const { token } = useAuth();
+
+const fetchOrders = async () => {
   try {
     isTableDataLoading.value = true;
-    const response = await fetch(`${mainUrl}/articles`);
+    const response = await fetch(`${mainUrl}/orders/all`, {
+      headers: {
+        Authorization: `Bearer ${token.value}`,
+      },
+    });
     const data = await response.json();
     tableDataArray.value = data;
   } catch (error) {
@@ -60,16 +64,17 @@ const fetchArticles = async () => {
 };
 
 onMounted(() => {
-  fetchArticles();
+  fetchOrders();
 });
 
-const updateArticle = async (article: Article) => {
+const updateOrder = async (order: Order) => {
   try {
-    const { id, createdAt, updatedAt, images, ...updateData } = article;
-    await fetch(`${mainUrl}/articles/${id}`, {
+    const { id, createdAt, updatedAt, user, ...updateData } = order;
+    await fetch(`${mainUrl}/orders/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token.value}`,
       },
       body: JSON.stringify(updateData),
     });
@@ -78,13 +83,16 @@ const updateArticle = async (article: Article) => {
   }
 };
 
-const deleteArticle = async (id: number) => {
+const deleteOrder = async (id: number) => {
   try {
     const confirmed = confirm("Вы точно хотите удалить статью?");
     if (!confirmed) return;
 
     await fetch(`${mainUrl}/articles/${id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token.value}`,
+      },
     });
 
     tableDataArray.value = tableDataArray.value.filter((a) => a.id !== id);
@@ -93,41 +101,36 @@ const deleteArticle = async (id: number) => {
   }
 };
 
-const columns: TableColumn<Article>[] = [
+const columns: TableColumn<Order>[] = [
   {
     accessorKey: "id",
     header: "#id",
     cell: ({ row }) => `#${row.getValue("id")}`,
   },
-
   {
-    accessorKey: "title",
-    header: ({ column }) => getHeader(column, "Заголовок Статьи"),
-    cell: ({ row }) => {
-      const article = row.original;
-      return h(UInput, {
-        modelValue: article.title,
-        "onUpdate:modelValue": async (value: string) => {
-          article.title = value;
-          await updateArticle(article);
-        },
-      });
-    },
+    accessorKey: "name",
+    header: ({ column }) => getHeader(column, "Пользователь"),
+    cell: ({ row }) => row.original.user?.name || "—",
   },
   {
-    accessorKey: "content",
-    header: ({ column }) => getHeader(column, "Контент"),
-    cell: ({ row }) => {
-      const article = row.original;
-      return h(UTextarea, {
-        modelValue: article.content,
-        autoresize: true,
-        "onUpdate:modelValue": async (value: string) => {
-          article.content = value;
-          await updateArticle(article);
-        },
-      });
-    },
+    accessorKey: "Почта",
+    header: ({ column }) => getHeader(column, "Почта"),
+    cell: ({ row }) => row.original.user?.email || "—",
+  },
+  {
+    accessorKey: "title",
+    header: ({ column }) => getHeader(column, "Заголовок заказа"),
+    cell: ({ row }) => row.getValue("title"),
+  },
+  {
+    accessorKey: "description",
+    header: ({ column }) => getHeader(column, "Заказ"),
+    cell: ({ row }) => row.getValue("description"),
+  },
+  {
+    accessorKey: "phone",
+    header: ({ column }) => getHeader(column, "Телефон"),
+    cell: ({ row }) => row.getValue("phone"),
   },
   {
     accessorKey: "createdAt",
@@ -151,7 +154,7 @@ const columns: TableColumn<Article>[] = [
         color: "red",
         variant: "ghost",
         title: "Удалить статью",
-        onClick: () => deleteArticle(article.id),
+        onClick: () => deleteOrder(article.id),
       });
     },
   },
@@ -169,7 +172,7 @@ const sorting = ref([
   },
 ]);
 
-function getHeader(column: Column<Article>, label: string) {
+function getHeader(column: Column<Order>, label: string) {
   const isSorted = column.getIsSorted();
 
   return h(

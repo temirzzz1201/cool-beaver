@@ -39,14 +39,12 @@ import type { Users } from "~/types";
 const table = useTemplateRef("table");
 const UButton = resolveComponent("UButton");
 const UDropdownMenu = resolveComponent("UDropdownMenu");
-const UInput = resolveComponent("UInput");
 const tableDataArray = ref<Users[]>([]);
 const isTableDataLoading = ref(false);
 
 const { token } = useAuth();
 
 const fetchUsers = async () => {
-  console.log(token.value);
   try {
     isTableDataLoading.value = true;
 
@@ -56,6 +54,7 @@ const fetchUsers = async () => {
       },
     });
     const data = await response.json();
+
     tableDataArray.value = data;
   } catch (error) {
     console.error("Ошибка получения пользователей:", error);
@@ -119,16 +118,7 @@ const columns: TableColumn<Users>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => getHeader(column, "Имя"),
-    cell: ({ row }) => {
-      const user = row.original;
-      return h(UInput, {
-        modelValue: user.name,
-        "onUpdate:modelValue": async (value: string) => {
-          user.name = value;
-          await updateUser(user);
-        },
-      });
-    },
+    cell: ({ row }) => row.getValue("name"),
   },
   {
     accessorKey: "email",

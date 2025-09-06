@@ -13,6 +13,17 @@ export interface Article {
   updatedAt?: string;
 }
 
+export interface Order {
+  createdAt: string;
+  description: string;
+  id: number;
+  phone: string;
+  status: string;
+  title: string;
+  updatedAt: string;
+  user: Users;
+}
+
 export interface NavLinks {
   id: number;
   title: string;
@@ -31,6 +42,7 @@ export interface Users {
   email: string;
   password?: string;
   creationDate: string;
+  phone: string;
   role?: string;
   resetPasswordToken?: string;
   resetPasswordExpires?: string;
@@ -44,13 +56,14 @@ export interface TabsItems {
 }
 
 export enum TabLabel {
-  Chart = "График",
+  Chart = "График зарег. пользователей",
   Create = "Создать статью",
-  Update = "Обновить/Удалить статью",
-  Users = "Таблица пользователей",
+  Update = "Все статьи",
+  Users = "Все пользователи",
   Profile = "Профиль",
   MyOrders = "Мои заказы",
   CreateOrder = "Создать заказ",
+  Orders = "Все заказы",
 }
 
 export interface MapPoints {

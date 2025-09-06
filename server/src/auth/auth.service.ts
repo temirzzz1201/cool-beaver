@@ -52,9 +52,6 @@ export class AuthService {
       .digest('hex');
     const tokenExpiry = Date.now() + 3600000;
 
-    console.log('Generated Token:', resetToken);
-    console.log('Hashed Token:', hashedToken);
-
     user.resetPasswordToken = hashedToken;
     user.resetPasswordExpires = tokenExpiry;
     await user.save();

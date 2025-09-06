@@ -8,7 +8,7 @@ import {
   Default,
   HasMany,
 } from 'sequelize-typescript';
-import { Order } from 'src/order/order.model';
+import { Order } from 'src/orders/order.model';
 
 @Table({ tableName: 'users', timestamps: false })
 export class User extends Model<User> {

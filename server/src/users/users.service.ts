@@ -4,6 +4,7 @@ import { User } from './user.model';
 import * as bcrypt from 'bcrypt';
 import { UsersDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class UsersService {
@@ -53,10 +54,12 @@ export class UsersService {
     return isMatch ? user : null;
   }
 
-  async findAll(): Promise<User[]> {
-    return this.userModel.findAll();
+  async findAll(options?: { excludeRole?: string }): Promise<User[]> {
+    const where = options?.excludeRole
+      ? { role: { [Op.ne]: options.excludeRole } }
+      : {};
+    return this.userModel.findAll({ where });
   }
-
   async update(id: number, userId: number, dto: UpdateUserDto): Promise<User> {
     const user = await this.findById(id.toString());
     if (!user) {

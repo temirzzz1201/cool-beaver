@@ -55,11 +55,16 @@ export const useMainStore = defineStore("mainStore", () => {
     {
       id: 3,
       label: TabLabel.Update,
-      icon: "i-lucide-file-text",
+      icon: "i-lucide-table",
     },
     {
       id: 4,
       label: TabLabel.Users,
+      icon: "i-lucide-table",
+    },
+    {
+      id: 5,
+      label: TabLabel.Orders,
       icon: "i-lucide-table",
     },
   ]);

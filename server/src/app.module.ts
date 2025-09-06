@@ -5,7 +5,7 @@ import { sequelizeConfig } from './config/sequelize.config';
 import { ArticlesModule } from './articles/articles.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { OrdersModule } from './order/orders.module';
+import { OrdersModule } from './orders/orders.module';
 import { ContactModule } from './conact/contact.module';
 
 @Module({

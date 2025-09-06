@@ -1,4 +1,10 @@
-import { IsOptional, IsString, IsEmail } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  IsEmail,
+  IsNotEmpty,
+  IsPhoneNumber,
+} from 'class-validator';
 
 export class UpdateUserDto {
   @IsOptional()
@@ -13,7 +19,7 @@ export class UpdateUserDto {
   @IsString()
   readonly creationDate?: string;
 
-  @IsOptional()
-  @IsString()
-  readonly phone?: string;
+  @IsNotEmpty()
+  @IsPhoneNumber('RU')
+  readonly phone: string;
 }
