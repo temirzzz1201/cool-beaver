@@ -23,7 +23,6 @@ onMounted(() => {
     attribution: "",
   })
     .on("load", () => {
-      // когда тайлы подгрузились — убираем спинер
       loading.value = false;
     })
     .addTo(map);

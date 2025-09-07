@@ -22,7 +22,7 @@
           :src="`${imageUrl}${
             article.images[getActiveIndex(article.id)]?.path
           }`"
-          alt="article image"
+          :alt="`Изображение статьи ${article.id}`"
           class="w-full rounded-md object-cover aspect-video"
           loading="lazy"
           width="600"
@@ -43,7 +43,7 @@
           >
             <nuxt-img
               :src="`${imageUrl}${img.path}`"
-              alt="thumbnail"
+              :alt="`thumbnail ${article.id}`"
               class="w-full h-full object-cover"
               loading="lazy"
             />

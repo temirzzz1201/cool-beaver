@@ -13,7 +13,8 @@
     </h2>
   </section>
   <section class="mb-14 max-[768px]:mt-20">
-    <app-slider :slides="slides" />
+    <app-spinner v-if="!slides || slides.length === 0" />
+    <app-slider v-else :slides="slides" />
   </section>
 
   <section class="mb-14 max-w-[1920px] mx-auto text-left">
