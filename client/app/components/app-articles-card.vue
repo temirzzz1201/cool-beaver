@@ -58,7 +58,7 @@
       </div>
 
       <p
-        class="flex-1 text-sm text-gray-600 dark:text-gray-400 line-clamp-3 mb-2"
+        class="flex-1 text-sm text-gray-600 dark:text-gray-100 line-clamp-3 mb-2"
       >
         {{ article.content }}
       </p>
