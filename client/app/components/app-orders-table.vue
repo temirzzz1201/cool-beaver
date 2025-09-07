@@ -18,6 +18,12 @@
 
     <app-spinner v-else />
 
+    <div>
+      <u-button icon="i-lucide-table" @click="downloadExcel('orders')"
+        >Выгрузить в exel</u-button
+      >
+    </div>
+
     <div class="flex justify-center border-t border-default pt-4">
       <u-pagination
         :default-page="
@@ -66,22 +72,6 @@ const fetchOrders = async () => {
 onMounted(() => {
   fetchOrders();
 });
-
-const updateOrder = async (order: Order) => {
-  try {
-    const { id, createdAt, updatedAt, user, ...updateData } = order;
-    await fetch(`${mainUrl}/orders/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token.value}`,
-      },
-      body: JSON.stringify(updateData),
-    });
-  } catch (error) {
-    console.error("Ошибка обновления:", error);
-  }
-};
 
 const deleteOrder = async (id: number) => {
   try {

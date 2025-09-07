@@ -16,6 +16,12 @@
 
     <app-spinner v-else />
 
+    <div>
+      <u-button icon="i-lucide-table" @click="downloadExcel('users')"
+        >Выгрузить в exel</u-button
+      >
+    </div>
+
     <div class="flex justify-center border-t border-default pt-4">
       <u-pagination
         :default-page="
@@ -66,29 +72,6 @@ const fetchUsers = async () => {
 onMounted(() => {
   fetchUsers();
 });
-
-const updateUser = async (user: Users) => {
-  try {
-    const {
-      id,
-      password,
-      role,
-      resetPasswordToken,
-      resetPasswordExpires,
-      ...updateData
-    } = user;
-    await fetch(`${mainUrl}/users/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token.value}`,
-      },
-      body: JSON.stringify(updateData),
-    });
-  } catch (error) {
-    console.error("Ошибка обновления:", error);
-  }
-};
 
 const deleteUser = async (id: number) => {
   try {

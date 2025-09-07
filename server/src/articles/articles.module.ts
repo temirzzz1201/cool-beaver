@@ -9,5 +9,6 @@ import { ArticleImage } from './articles-image.model';
   imports: [SequelizeModule.forFeature([Article, ArticleImage])],
   providers: [ArticlesService],
   controllers: [ArticlesController],
+  exports: [ArticlesService],
 })
 export class ArticlesModule {}

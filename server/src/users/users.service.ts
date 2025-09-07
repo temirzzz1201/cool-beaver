@@ -60,6 +60,7 @@ export class UsersService {
       : {};
     return this.userModel.findAll({ where });
   }
+
   async update(id: number, userId: number, dto: UpdateUserDto): Promise<User> {
     const user = await this.findById(id.toString());
     if (!user) {
