@@ -1,7 +1,7 @@
 <template>
-  <section class="max-w-[1920px] mx-auto mt-32 mb-14 max-[768px]:mt-20">
+  <section class="max-w-[1920px] mx-auto mt-18 md:mt-26 mb-8 md:mb-14">
     <h1
-      class="text-3xl text-gray-800 dark:text-white font-bold text-center mb-8"
+      class="text-3xl text-gray-800 dark:text-white font-bold text-center mb-4"
     >
       Контакты
     </h1>
@@ -12,7 +12,7 @@
     </p>
   </section>
 
-  <section class="mb-14">
+  <section class="mb-8 md:mb-14">
     <client-only>
       <div class="rounded-xl overflow-hidden shadow-lg">
         <app-map />
@@ -20,7 +20,9 @@
     </client-only>
   </section>
 
-  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
+  <section
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 md:mb-14"
+  >
     <div
       v-for="item in store.contactsFeatureArray"
       class="flex flex-col items-center rounded-xl bg-blue-100 dark:bg-gray-400 shadow p-6"
@@ -37,12 +39,12 @@
   </section>
 
   <section
-    class="flex flex-col items-center mb-24 bg-blue-200 dark:bg-gray-800 p-10 rounded-2xl"
+    class="flex flex-col items-center bg-blue-200 dark:bg-gray-800 p-10 rounded-2xl mb-24 md:mb-20"
   >
     <h2
       class="text-2xl text-gray-800 dark:text-white font-semibold mb-4 text-left"
     >
-      Связаться с нами
+      Оставить заявку
     </h2>
     <app-form
       :schema="schema"

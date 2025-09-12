@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-4 mt-60">
+  <div class="space-y-4">
     <u-table
       v-if="tableDataArray.length > 0"
       ref="table"

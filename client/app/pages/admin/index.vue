@@ -26,7 +26,7 @@
       </p>
     </section>
     <section>
-      <app-tabs />
+      <app-tabs class="mt-8" />
     </section>
   </client-only>
 </template>
