@@ -1,15 +1,17 @@
 <template>
   <client-only>
-    <section v-if="authorized" class="mt-30 max-[768px]:mt-20 overflow-auto">
-      <div class="flex">
-        <p class="mb-4 text-2xl">
-          Привет,
-          <span
-            :class="{ 'text-orange-600': user.role === 'admin' }"
-            class="text-3xl text-emerald-500"
-            >{{ user?.name }}</span
-          >
-        </p>
+    <section v-if="authorized" class="mt-30 max-[768px]:mt-20">
+      <div class="flex items-center gap-4 mt-26 mb-10">
+        <app-avatar
+          :src="user?.avatar ? `${imageUrl}${user.avatar}` : null"
+          :name="user?.name"
+          :user-id="user?.id"
+          size="md"
+        />
+
+        <span class="font-medium text-gray-800 dark:text-white">
+          Привет {{ user?.name || "" }} :)</span
+        >
         <u-button class="ml-6 h-[36px] cursor-pointer" @click="logout"
           >Выйти</u-button
         >

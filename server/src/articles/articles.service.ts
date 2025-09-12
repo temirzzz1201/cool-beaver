@@ -14,17 +14,21 @@ export class ArticlesService {
   ) {}
 
   async create(dto: CreateArticleDto, files?: Express.Multer.File[]) {
-    const article = await this.articleModel.create(dto as any);
+    try {
+      const article = await this.articleModel.create(dto as any);
 
-    if (files && files.length > 0) {
-      const images = files.map((file) => ({
-        articleId: article.id,
-        path: `/uploads/articles/${file.filename}`,
-      }));
-      await this.articleImageModel.bulkCreate(images as any);
+      if (files && files.length > 0) {
+        const images = files.map((file) => ({
+          articleId: article.id,
+          path: `/uploads/articles/${file.filename}`,
+        }));
+        await this.articleImageModel.bulkCreate(images as any);
+      }
+
+      return this.findOne(article.id);
+    } catch (error) {
+      throw new Error(`Error, can't create article`);
     }
-
-    return this.findOne(article.id);
   }
 
   findAll() {

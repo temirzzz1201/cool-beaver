@@ -52,13 +52,13 @@
           >
             <div class="flex items-center text-gray-100 dark:text-white">
               <u-icon name="i-lucide-mail" class="w-4 h-4 mr-2" />
-              name@email.com
+              tmzzz@inbox.ru
             </div>
           </u-link>
           <u-link href="tel:+790000000" class="hover:underline">
             <div class="flex items-center text-gray-100 dark:text-white">
               <u-icon name="i-lucide-phone" class="w-4 h-4 mr-2" />
-              8 900 000 00 00
+              +7 918 098 96 94
             </div>
           </u-link>
         </div>

@@ -7,6 +7,7 @@ import {
   AutoIncrement,
   Default,
   HasMany,
+  AllowNull,
 } from 'sequelize-typescript';
 import { Order } from 'src/orders/order.model';
 
@@ -56,6 +57,12 @@ export class User extends Model<User> {
     allowNull: true,
   })
   declare resetPasswordExpires: number | null;
+
+  @AllowNull(true)
+  @Column({
+    type: DataType.STRING,
+  })
+  declare avatar: string | null;
 
   @HasMany(() => Order)
   declare orders: Order[];

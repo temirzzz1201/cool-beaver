@@ -1,8 +1,17 @@
 <template>
   <client-only>
-    <h1 class="mt-26 text-2xl font-bold text-gray-700">
-      Добро пожаловать {{ user?.name }} !
-    </h1>
+    <div class="flex items-center gap-4 mt-26">
+      <app-avatar
+        :src="user?.avatar ? `${imageUrl}${user.avatar}` : null"
+        :name="user?.name"
+        :user-id="user?.id"
+        size="md"
+      />
+
+      <span class="font-medium text-gray-800 dark:text-white">
+        Привет {{ user?.name || "" }} :)</span
+      >
+    </div>
     <section class="max-w-4xl mx-auto py-10">
       <u-tabs :items="profileTabsItems" class="w-full">
         <template #profile>
@@ -106,6 +115,8 @@ const { $api } = useNuxtApp();
 
 const { user, logout } = useAuth();
 const orders = ref<any[]>([]);
+
+console.log("user ", user.value);
 
 const page = ref(1);
 const limit = 5;

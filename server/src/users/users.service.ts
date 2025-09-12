@@ -5,6 +5,8 @@ import * as bcrypt from 'bcrypt';
 import { UsersDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Op } from 'sequelize';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Injectable()
 export class UsersService {
@@ -45,6 +47,46 @@ export class UsersService {
       password: hash,
       role,
     } as any);
+  }
+
+  private avatarsPath = path.join(__dirname, '../../uploads/avatars');
+
+  private clearAvatarsFolder() {
+    if (!fs.existsSync(this.avatarsPath)) return;
+
+    fs.readdirSync(this.avatarsPath).forEach((file) => {
+      const filePath = path.join(this.avatarsPath, file);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
+    });
+  }
+
+  async updateAvatar(userId: number, filename: string) {
+    const user = await this.userModel.findByPk(userId);
+    if (!user) throw new Error('User not found');
+
+    this.clearAvatarsFolder();
+
+    user.avatar = `/uploads/avatars/${filename}`;
+    await user.save();
+    return user;
+  }
+
+  async deleteAvatar(userId: number) {
+    const user = await this.userModel.findByPk(userId);
+    if (!user) throw new Error('User not found');
+
+    if (user.avatar) {
+      const filePath = path.join(this.avatarsPath, path.basename(user.avatar));
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
+      user.avatar = null;
+      await user.save();
+    }
+
+    return user;
   }
 
   async validateUser(email: string, password: string) {
