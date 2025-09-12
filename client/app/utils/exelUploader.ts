@@ -5,8 +5,6 @@ export const downloadExcel = async (type: "orders" | "users" | "articles") => {
       body: JSON.stringify({ type }),
     });
 
-    console.log(JSON.stringify({ type }));
-
     if (!response.ok) throw new Error(`Ошибка экспорта: ${response.status}`);
 
     const blob = await response.blob();

@@ -1,13 +1,11 @@
 <template>
-  <section class="max-w-[1920px] mx-auto mt-18 md:mt-26 mb-8 md:mb-14">
+  <section class="max-w-[1920px] mx-auto mt-32 mb-14 max-[768px]:mt-20">
     <h1
-      class="text-3xl text-gray-800 dark:text-white font-bold text-center mb-4"
+      class="text-3xl text-gray-800 dark:text-white font-bold text-center mb-3"
     >
-      Контакты
+      Связаться с нами
     </h1>
-    <p
-      class="text-center text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mt-3"
-    >
+    <p class="text-center text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
       Свяжитесь с&nbsp;нами любым удобным способом.
     </p>
   </section>
@@ -39,7 +37,7 @@
   </section>
 
   <section
-    class="flex flex-col items-center bg-blue-200 dark:bg-gray-800 p-10 rounded-2xl mb-24 md:mb-20"
+    class="flex flex-col items-center bg-blue-200 dark:bg-gray-800 p-10 rounded-2xl mb-8 md:mb-24"
   >
     <h2
       class="text-2xl text-gray-800 dark:text-white font-semibold mb-4 text-left"

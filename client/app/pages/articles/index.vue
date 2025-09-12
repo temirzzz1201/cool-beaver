@@ -1,13 +1,11 @@
 <template>
   <section class="max-w-[1920px] mx-auto mt-32 mb-14 max-[768px]:mt-20">
     <h1
-      class="text-3xl text-gray-800 dark:text-white font-bold text-center mb-8"
+      class="text-3xl text-gray-800 dark:text-white font-bold text-center mb-3"
     >
       Выполненные работы
     </h1>
-    <p
-      class="text-center text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mt-3"
-    >
+    <p class="text-center text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
       Здесь вы&nbsp;можете увидеть примеры выполненных нами работ. Мы&nbsp;ценим
       качество, скорость и&nbsp;ответственность при каждом заказе.
     </p>
@@ -22,12 +20,12 @@
 
   <section
     v-if="articles.length > 0"
-    class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-4 mb-14"
+    class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-4 mb-8 md:mb-24"
   >
     <app-articles-card :articles="articles" />
   </section>
 
-  <app-ctx>
+  <app-ctx class="mb-8 md:mb-24">
     <template #title>Хотите заказать работу прямо сейчас?</template>
     <template #text>
       Свяжитесь с&nbsp;нами, и&nbsp;мы&nbsp;быстро подберём специалистов для

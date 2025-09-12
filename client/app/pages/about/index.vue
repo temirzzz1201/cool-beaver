@@ -1,10 +1,10 @@
 <template>
   <section class="max-w-[1920px] mx-auto mt-32 max-[768px]:mt-20">
     <header class="mb-12 text-center">
-      <h1 class="text-3xl text-gray-700 dark:text-white font-bold">
+      <h1 class="text-3xl text-gray-700 dark:text-white font-bold mb-3">
         О компании
       </h1>
-      <p class="mt-3 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+      <p class="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
         Наша компания специализируется на&nbsp;предоставлении разнорабочих для
         любых задач&nbsp;&mdash; от&nbsp;стройки и&nbsp;ремонта до&nbsp;погрузки
         и&nbsp;разгрузки.
@@ -49,7 +49,7 @@
     </div>
   </section>
 
-  <section class="mb-14">
+  <section class="mb-8 md:mb-24">
     <h2
       class="text-2xl font-semibold text-gray-700 dark:text-white mb-6 text-left"
     >
@@ -95,7 +95,7 @@
     </div>
   </section>
 
-  <app-ctx>
+  <app-ctx class="mb-8 md:mb-24">
     <template #title>Нужны разнорабочие уже сегодня?</template>
     <template #text>
       Свяжитесь с&nbsp;нами прямо сейчас — мы подберём проверенных сотрудников

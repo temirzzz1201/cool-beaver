@@ -1,6 +1,6 @@
 <template>
   <section
-    class="flex flex-col items-center py-12 bg-blue-500 dark:bg-gray-400 rounded-xl shadow mb-24"
+    class="flex flex-col items-center py-12 bg-blue-500 dark:bg-gray-400 rounded-xl shadow"
   >
     <h2 class="text-2xl font-semibold text-gray-100 dark:text-white mb-4">
       <slot name="title"></slot>

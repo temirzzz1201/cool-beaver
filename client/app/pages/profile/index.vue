@@ -116,8 +116,6 @@ const { $api } = useNuxtApp();
 const { user, logout } = useAuth();
 const orders = ref<any[]>([]);
 
-console.log("user ", user.value);
-
 const page = ref(1);
 const limit = 5;
 const paginatedOrders = computed(() =>

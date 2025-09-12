@@ -1,15 +1,15 @@
 <template>
   <section
-    class="relative w-full h-[400px] md:h-[600px] flex mt-22 md:mt-34 mb-8 md:mb-14 bg-cover bg-no-repeat bg-center md:bg-top"
+    class="relative w-full min-h-[400px] md:min-h-[700px] flex mt-22 md:mt-34 mb-8 md:mb-[60px] bg-cover bg-no-repeat bg-center md:bg-top"
     style="background-image: url('/slider/worker1.jpg')"
   >
     <div class="absolute inset-0 bg-gray-800 opacity-40"></div>
     <div
       class="relative z-10 text-white text-right px-4 py-8 max-w-[560px] mt-auto ml-auto"
     >
-      <h2 class="text-3xl md:text-5xl font-bold leading-8 md:leading-12 mb-4">
+      <h1 class="text-3xl md:text-5xl font-bold leading-8 md:leading-12 mb-4">
         Профессиональные разрабочие для любых задач
-      </h2>
+      </h1>
       <p class="text-lg md:text-xl ml-auto max-w-[360px] mb-6">
         Быстро, надёжно и&nbsp;качественно. Закажите прямо сейчас.
       </p>
@@ -23,9 +23,12 @@
   </section>
 
   <section class="mb-8 md:mb-14 max-w-[1920px] mx-auto text-left">
-    <h2 class="text-2xl text-gray-800 dark:text-white font-semibold mb-8">
-      Чем мы занимаемся
+    <h2
+      class="text-2xl text-gray-800 dark:text-white font-semibold max-w-unset md:max-w-[320px] mb-2 ml-2 md:ml-6"
+    >
+      Чем мы&nbsp;занимаемся наша компания
     </h2>
+    <p class="text-md mb-8 ml-2 md:ml-6">Виды выполняемых нами работ</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-3">
       <AppFeatureCard
         v-for="service in appFeatureServicesArray"
@@ -39,19 +42,24 @@
 
   <section class="mb-8 md:mb-14">
     <h2
-      class="text-2xl text-gray-800 dark:text-white font-semibold mb-6 text-left"
+      class="text-2xl text-gray-800 dark:text-white font-semibold mb-2 text-left ml-2 md:ml-6"
     >
       Полезные материалы
     </h2>
+    <p class="text-md mb-8 ml-2 md:ml-6">Наши последние работы</p>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-3">
-      <app-articles-card v-if="lastArticles" :articles="lastArticles" />
+      <app-articles-card v-if="lastArticles?.length" :articles="lastArticles" />
     </div>
   </section>
 
-  <section class="mb-14 max-w-[1920px] mx-auto text-left">
-    <h2 class="text-2xl text-gray-800 dark:text-white font-semibold mb-6">
+  <section class="mb-8 md:mb-24 max-w-[1920px] mx-auto text-left">
+    <h2
+      class="text-2xl text-gray-800 dark:text-white font-semibold mb-2 ml-2 md:ml-6"
+    >
       Почему выбирают нас
     </h2>
+    <p class="text-md mb-8 ml-2 md:ml-6">Наши преимущества</p>
+
     <div class="grid sm:grid-cols-2 gap-3 md:gap-3">
       <app-feature-card
         v-for="benefit in appFeatureBenefitsArray"
@@ -63,7 +71,7 @@
     </div>
   </section>
 
-  <app-ctx>
+  <app-ctx class="mb-8 md:mb-24">
     <template #title>Нужны рабочие уже сегодня?</template>
     <template #text>
       Свяжитесь с&nbsp;нами прямо сейчас и&nbsp;получите консультацию бесплатно
