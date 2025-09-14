@@ -4,7 +4,7 @@
   >
     <app-logo />
 
-    <ul class="hidden md:flex items-center space-x-6">
+    <ul class="hidden md:flex items-center space-x-2 lg:space-x-6">
       <li v-for="link in store.navLinks" :key="link.id">
         <u-link
           :to="link.link"

@@ -11,26 +11,31 @@ export const useMainStore = defineStore("mainStore", () => {
   const navLinks = ref<NavLinks[]>([
     {
       id: 1,
+      title: "Главная",
+      link: "/",
+    },
+    {
+      id: 2,
       title: "Наша работа",
       link: "/articles",
     },
     {
-      id: 2,
+      id: 3,
       title: "О нас",
       link: "/about",
     },
     {
-      id: 3,
+      id: 4,
       title: "Контакты",
       link: "/contacts",
     },
     {
-      id: 4,
+      id: 5,
       title: "Личный кабинет",
       link: "/profile",
     },
     {
-      id: 5,
+      id: 6,
       title: "Авторизация",
       link: "/login",
     },
