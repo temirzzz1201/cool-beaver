@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col min-h-screen bg-gradient-to-r from-white-50 to-gray-100 dark:from-gray-400 dark:to-gray-600"
+    class="flex flex-col min-h-screen bg-gradient-to-r from-white-50 to-gray-300 dark:from-gray-400 dark:to-gray-600"
   >
     <app-header>
       <app-navigation />

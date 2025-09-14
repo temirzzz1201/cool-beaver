@@ -26,7 +26,7 @@
     </h2>
     <p class="text-md mb-8 ml-2 md:ml-6">Наши последние работы</p>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-3">
-      <app-articles-card v-if="lastArticles?.length" :articles="lastArticles" />
+      <app-articles-card :articles="lastArticles ?? []" />
     </div>
   </section>
 
@@ -49,12 +49,12 @@
     </div>
   </section>
 
-  <app-ctx class="mb-8 md:mb-24">
+  <app-promo class="mb-8 md:mb-24">
     <template #title>Нужны рабочие уже сегодня?</template>
     <template #text>
       Свяжитесь с&nbsp;нами прямо сейчас и&nbsp;получите консультацию бесплатно
     </template>
-  </app-ctx>
+  </app-promo>
 </template>
 
 <script setup lang="ts">

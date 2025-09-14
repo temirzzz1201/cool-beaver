@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-[70vh]">
+  <div class="flex flex-col items-center justify-center min-h-[70vh]">
     <h1 class="text-2xl mb-8">Создать аккаунт</h1>
 
     <app-form

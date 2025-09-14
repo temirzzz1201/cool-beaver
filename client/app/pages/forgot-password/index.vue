@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center mt-38">
+  <section class="flex items-center justify-center w-full min-h-[70vh]">
     <u-form
       :schema="schema"
       :state="state"
@@ -12,7 +12,7 @@
 
       <u-button type="submit"> Отправить </u-button>
     </u-form>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">

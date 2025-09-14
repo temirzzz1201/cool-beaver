@@ -9,7 +9,7 @@
   >
     <header
       v-show="visible"
-      class="fixed top-0 left-0 w-full z-1000 bg-white/50 dark:bg-gray-900/80 backdrop-blur-md shadow-sm"
+      class="fixed top-0 left-0 w-full z-1000 bg-gray-200/50 dark:bg-gray-900/80 backdrop-blur-md shadow-sm"
     >
       <slot></slot>
       <u-separator />
@@ -18,14 +18,14 @@
       >
         <u-link
           href="mailto:tmzzz@inbox.ru"
-          class="flex items-center text-indigo-500 hover:text-blue-600 dark:text-gray-300 mr-6"
+          class="flex items-center font-bold text-indigo-500 hover:text-blue-600 dark:text-gray-300 mr-6"
         >
           <u-icon name="i-lucide-mail" class="w-4 h-4 mr-2" />
           tmzzz@inbox.ru
         </u-link>
         <u-link
           href="tel:+79180989694"
-          class="flex items-center text-indigo-500 hover:text-blue-600 dark:text-gray-300"
+          class="flex items-center font-bold text-indigo-500 hover:text-blue-600 dark:text-gray-300"
         >
           <u-icon name="i-lucide-phone" class="w-4 h-4 mr-2" />
           +7 918 098 96 94

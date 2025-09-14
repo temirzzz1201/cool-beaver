@@ -5,13 +5,13 @@
     <p v-else class="text-gray-600 dark:text-gray-300">Загрузка...</p>
   </section>
 
-  <app-ctx class="mb-8 md:mb-24">
+  <app-promo class="mb-8 md:mb-24">
     <template #title> Хотите такой&nbsp;же результат?</template>
     <template #text>
       Свяжитесь с&nbsp;нами, и&nbsp;мы&nbsp;выполним работу профессионально
       и&nbsp;быстро.
     </template>
-  </app-ctx>
+  </app-promo>
 </template>
 
 <script setup lang="ts">

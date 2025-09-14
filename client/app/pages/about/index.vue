@@ -43,13 +43,13 @@
     </div>
   </section>
 
-  <app-ctx class="mb-8 md:mb-24">
+  <app-promo class="mb-8 md:mb-24">
     <template #title>Нужны разнорабочие уже сегодня?</template>
     <template #text>
       Свяжитесь с&nbsp;нами прямо сейчас — мы подберём сотрудников под вашу
       задачу и сможем отправить их в течение часа.
     </template>
-  </app-ctx>
+  </app-promo>
 </template>
 
 <script setup lang="ts">

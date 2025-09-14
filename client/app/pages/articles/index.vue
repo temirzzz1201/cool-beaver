@@ -25,13 +25,13 @@
     <app-articles-card :articles="articles" />
   </section>
 
-  <app-ctx class="mb-8 md:mb-24">
+  <app-promo class="mb-8 md:mb-24">
     <template #title>Хотите заказать работу прямо сейчас?</template>
     <template #text>
       Свяжитесь с&nbsp;нами, и&nbsp;мы&nbsp;быстро подберём специалистов для
       вашего объекта.
     </template>
-  </app-ctx>
+  </app-promo>
 
   <client-only>
     <div v-if="total > limit" class="flex justify-center my-10">
