@@ -1,14 +1,16 @@
 <template>
-  <div class="flex flex-col min-h-screen bg-blue-50 dark:bg-gray-600">
+  <div
+    class="flex flex-col min-h-screen bg-gradient-to-r from-white-50 to-gray-100 dark:from-gray-400 dark:to-gray-600"
+  >
     <app-header>
       <app-navigation />
     </app-header>
 
-    <UApp class="flex-1 flex flex-col">
+    <u-app class="flex-1 flex flex-col">
       <main class="flex-1 w-full max-w-[1920px] px-3 py-4 mx-auto">
         <slot />
       </main>
-    </UApp>
+    </u-app>
 
     <app-footer />
   </div>

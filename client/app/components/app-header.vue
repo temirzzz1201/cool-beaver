@@ -9,30 +9,26 @@
   >
     <header
       v-show="visible"
-      class="absolute top-0 left-0 w-full z-100 bg-blue-500 dark:bg-gray-800 text-gray-600 backdrop-blur-sm shadow-md"
+      class="fixed top-0 left-0 w-full z-1000 bg-white/50 dark:bg-gray-900/80 backdrop-blur-md shadow-sm"
     >
       <slot></slot>
-      <u-separator color="neutral" />
+      <u-separator />
       <div
-        class="w-full max-w-[1920px] h-[30px] hidden md:flex md:items-center md:justify-end px-4 mr-auto ml-auto"
+        class="w-full max-w-[1920px] hidden md:flex justify-end items-center mx-auto px-6 py-2 text-sm text-gray-600 dark:text-gray-300"
       >
         <u-link
-          href="mailto:name@email.com"
-          class="text-[14px] dark:text-white font-bold mr-2"
+          href="mailto:tmzzz@inbox.ru"
+          class="flex items-center text-indigo-500 hover:text-blue-600 dark:text-gray-300 mr-6"
         >
-          <div class="flex items-center text-gray-100 dark:text-white">
-            <u-icon name="i-lucide-mail" class="w-4 h-4 mr-2" />
-            tmzzz@inbox.ru
-          </div>
+          <u-icon name="i-lucide-mail" class="w-4 h-4 mr-2" />
+          tmzzz@inbox.ru
         </u-link>
         <u-link
-          href="tel:+790000000"
-          class="text-[14px] font-bold dark:text-white"
+          href="tel:+79180989694"
+          class="flex items-center text-indigo-500 hover:text-blue-600 dark:text-gray-300"
         >
-          <div class="flex items-center text-gray-100 dark:text-white">
-            <u-icon name="i-lucide-phone" class="w-4 h-4 mr-2" />
-            +7 918 098 96 94
-          </div>
+          <u-icon name="i-lucide-phone" class="w-4 h-4 mr-2" />
+          +7 918 098 96 94
         </u-link>
       </div>
     </header>
@@ -45,11 +41,7 @@ let lastScroll = 0;
 
 const handleScroll = () => {
   const current = window.scrollY;
-  if (current <= 0) {
-    visible.value = true;
-  } else {
-    visible.value = current < lastScroll;
-  }
+  visible.value = current <= 0 || current < lastScroll;
   lastScroll = current;
 };
 

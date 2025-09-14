@@ -1,109 +1,64 @@
 <template>
-  <section class="max-w-[1920px] mx-auto mt-32 max-[768px]:mt-20">
+  <section class="max-w-[1920px] mx-auto mt-18 md:mt-32 mb-8 md:mb-24">
     <header class="mb-12 text-center">
-      <h1 class="text-3xl text-gray-700 dark:text-white font-bold mb-3">
+      <h1
+        class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-3"
+      >
         О компании
       </h1>
-      <p class="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-        Наша компания специализируется на&nbsp;предоставлении разнорабочих для
-        любых задач&nbsp;&mdash; от&nbsp;стройки и&nbsp;ремонта до&nbsp;погрузки
-        и&nbsp;разгрузки.
+      <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        Мы предоставляем разнорабочих для любых задач&nbsp;&mdash; от стройки и
+        ремонта до погрузки и разгрузки.
       </p>
     </header>
   </section>
 
-  <section class="mb-14">
-    <h2
-      class="text-2xl text-gray-700 dark:text-white font-semibold mb-6 text-left"
-    >
+  <section class="mb-8 md:mb-24">
+    <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-6 ml-2">
       Почему выбирают нас
     </h2>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow">
-        <h3 class="font-semibold text-gray-700 dark:text-white text-lg mb-2">
-          Опытные разнорабочие
-        </h3>
-        <p class="text-gray-600 dark:text-gray-300">
-          В&nbsp;нашей базе только проверенные сотрудники с&nbsp;опытом работы
-          на&nbsp;стройках, складах, при погрузке и&nbsp;разгрузке.
-        </p>
-      </div>
-      <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow">
-        <h3 class="font-semibold text-gray-700 dark:text-white text-lg mb-2">
-          Гибкий подход
-        </h3>
-        <p class="text-gray-600 dark:text-gray-300">
-          Предоставляем персонал на&nbsp;любое время&nbsp;&mdash;
-          от&nbsp;нескольких часов до&nbsp;долгосрочных проектов.
-        </p>
-      </div>
-      <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow">
-        <h3 class="font-semibold text-gray-700 dark:text-white text-lg mb-2">
-          Доступные цены
-        </h3>
-        <p class="text-gray-600 dark:text-gray-300">
-          Мы&nbsp;предлагаем честные расценки без скрытых доплат, сохраняя
-          высокое качество работы.
-        </p>
-      </div>
+    <div class="grid md:grid-cols-3 gap-3 md:gap-6">
+      <app-feature-card
+        v-for="reason in aboutFeatureReasonsArray"
+        :key="reason.id"
+        :icon="reason.icon ?? ''"
+        :title="reason.title ?? ''"
+        :text="reason.text"
+      />
     </div>
   </section>
 
   <section class="mb-8 md:mb-24">
-    <h2
-      class="text-2xl font-semibold text-gray-700 dark:text-white mb-6 text-left"
-    >
+    <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-6 ml-2">
       Наши услуги
     </h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow">
-        <h3 class="font-semibold text-gray-700 dark:text-gray-100 text-lg mb-2">
-          Подсобные рабочие
-        </h3>
-        <p class="text-gray-600 dark:text-gray-300">
-          Помощь на&nbsp;строительных объектах, уборка территории, вынос мусора,
-          подача материалов.
-        </p>
-      </div>
-      <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow">
-        <h3 class="font-semibold text-gray-700 dark:text-gray-100 text-lg mb-2">
-          Грузчики
-        </h3>
-        <p class="text-gray-600 dark:text-gray-300">
-          Погрузка и&nbsp;разгрузка материалов, мебели, оборудования, работа
-          на&nbsp;складах.
-        </p>
-      </div>
-      <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow">
-        <h3 class="font-semibold text-gray-700 dark:text-gray-100 text-lg mb-2">
-          Разнорабочие на час
-        </h3>
-        <p class="text-gray-600 dark:text-gray-300">
-          Если нужно срочно выполнить мелкие задачи&nbsp;&mdash; наши
-          специалисты готовы выйти в&nbsp;тот&nbsp;же день.
-        </p>
-      </div>
-      <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow">
-        <h3 class="font-semibold text-gray-700 dark:text-gray-100 text-lg mb-2">
-          Долгосрочные проекты
-        </h3>
-        <p class="text-gray-600 dark:text-gray-300">
-          Предоставляем бригады разнорабочих для длительных строительных
-          и&nbsp;ремонтных объектов.
-        </p>
-      </div>
+    <div class="grid md:grid-cols-2 gap-3 md:gap-6">
+      <app-feature-card
+        v-for="service in aboutFeatureServicesArray"
+        :key="service.id"
+        :icon="service.icon ?? ''"
+        :title="service.title ?? ''"
+        :text="service.text"
+      />
     </div>
   </section>
 
   <app-ctx class="mb-8 md:mb-24">
     <template #title>Нужны разнорабочие уже сегодня?</template>
     <template #text>
-      Свяжитесь с&nbsp;нами прямо сейчас — мы подберём проверенных сотрудников
-      под вашу задачу и сможем отправить их уже в течение часа.
+      Свяжитесь с&nbsp;нами прямо сейчас — мы подберём сотрудников под вашу
+      задачу и сможем отправить их в течение часа.
     </template>
   </app-ctx>
 </template>
 
 <script setup lang="ts">
 definePageMeta({ prerender: true });
+import { useMainStore } from "#imports";
+import { storeToRefs } from "#imports";
+
+const store = useMainStore();
+
+const { aboutFeatureReasonsArray, aboutFeatureServicesArray } =
+  storeToRefs(store);
 </script>

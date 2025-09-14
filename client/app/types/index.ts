@@ -74,7 +74,7 @@ export interface MapPoints {
 
 export interface AppFeature {
   id: number;
-  icon: string;
+  icon?: string;
   title?: string;
   text: string;
 }

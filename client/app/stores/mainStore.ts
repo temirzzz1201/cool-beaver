@@ -181,6 +181,46 @@ export const useMainStore = defineStore("mainStore", () => {
     },
   ]);
 
+  const aboutFeatureServicesArray = ref<AppFeature[]>([
+    {
+      id: 1,
+      title: "Подсобные рабочие",
+      text: "Помощь на стройке, уборка, вынос мусора, подача материалов.",
+    },
+    {
+      id: 2,
+      title: "Грузчики",
+      text: "Погрузка и разгрузка мебели, оборудования, работа на складах.",
+    },
+    {
+      id: 3,
+      title: "Разнорабочие на час",
+      text: "Мелкие задачи срочно — специалисты готовы выйти в тот же день.",
+    },
+    {
+      id: 4,
+      title: "Долгосрочные проекты",
+      text: "Бригады разнорабочих для длительных строительных объектов.",
+    },
+  ]);
+  const aboutFeatureReasonsArray = ref<AppFeature[]>([
+    {
+      id: 1,
+      title: "Опытные разнорабочие",
+      text: "Только проверенные сотрудники с опытом работы на стройках, складах и при погрузке.",
+    },
+    {
+      id: 2,
+      title: "Гибкий подход",
+      text: "Предоставляем персонал на любое время — от пары часов до долгосрочных проектов.",
+    },
+    {
+      id: 3,
+      title: "Доступные цены",
+      text: "Честные расценки без скрытых доплат при высоком качестве работы.",
+    },
+  ]);
+
   return {
     contactsMapPoints,
     navLinks,
@@ -190,5 +230,7 @@ export const useMainStore = defineStore("mainStore", () => {
     footerFeatureArray,
     contactsFeatureArray,
     profileTabsItems,
+    aboutFeatureServicesArray,
+    aboutFeatureReasonsArray,
   };
 });

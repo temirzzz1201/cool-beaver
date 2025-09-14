@@ -6,7 +6,11 @@
     @submit.prevent="(e) => emit('submit', e)"
   >
     <slot></slot>
-    <u-button color="secondary" type="submit" class="cursor-pointer">
+    <u-button
+      color="secondary"
+      type="submit"
+      class="cursor-pointer px-8 py-3 rounded-lg bg-white text-indigo-600 font-semibold shadow hover:bg-indigo-700 hover:text-white dark:bg-gray-200 dark:text-gray-800 transition"
+    >
       {{ buttonTitle || "Отправить" }}
     </u-button>
   </u-form>
