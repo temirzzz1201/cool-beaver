@@ -25,9 +25,13 @@
     </ul>
 
     <div class="md:hidden flex items-center">
-      <button @click="open = !open" class="text-indigo-700 dark:text-gray-200">
+      <u-button
+        @click="open = !open"
+        variant="ghost"
+        class="text-indigo-700 dark:text-gray-200"
+      >
         <u-icon :name="open ? 'i-lucide-x' : 'i-lucide-menu'" class="w-6 h-6" />
-      </button>
+      </u-button>
     </div>
 
     <u-drawer
