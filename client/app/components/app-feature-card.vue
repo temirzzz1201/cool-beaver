@@ -5,7 +5,9 @@
     <u-icon
       :name="icon"
       class="w-10 h-10 mb-4 text-indigo-600 dark:text-blue-400"
+      :aria-hidden="true"
     />
+
     <h3 class="font-semibold text-lg mb-2 text-gray-800 dark:text-white">
       {{ title }}
     </h3>

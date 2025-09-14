@@ -12,7 +12,10 @@
         <span class="font-medium text-gray-800 dark:text-white">
           Привет {{ user?.name || "" }} :)</span
         >
-        <u-button class="ml-6 h-[36px] cursor-pointer" @click="logout"
+        <u-button
+          class="ml-6 h-[36px] cursor-pointer"
+          @click="logout"
+          aria-label="Выйти"
           >Выйти</u-button
         >
       </div>

@@ -10,7 +10,7 @@
         <u-input v-model="state.email" type="email" class="min-w-[320px]" />
       </u-form-field>
 
-      <u-button type="submit"> Отправить </u-button>
+      <u-button type="submit" aria-label="Отправить"> Отправить </u-button>
     </u-form>
   </section>
 </template>

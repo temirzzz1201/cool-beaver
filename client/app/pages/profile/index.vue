@@ -21,7 +21,9 @@
             <p class="text-gray-600 font-bold">
               Дата регистрации: {{ formatDate(user?.creationDate) }}
             </p>
-            <u-button @click="logout" color="error">Выйти</u-button>
+            <u-button aria-label="Выйти" @click="logout" color="error"
+              >Выйти</u-button
+            >
           </div>
         </template>
 

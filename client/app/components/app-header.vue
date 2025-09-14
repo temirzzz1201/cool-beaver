@@ -20,15 +20,23 @@
           href="mailto:tmzzz@inbox.ru"
           class="flex items-center font-bold text-indigo-500 hover:text-blue-600 dark:text-gray-300 mr-6"
         >
-          <u-icon name="i-lucide-mail" class="w-4 h-4 mr-2" />
-          tmzzz@inbox.ru
+          <u-icon
+            aria-hidden="true"
+            name="i-lucide-mail"
+            class="w-4 h-4 mr-2"
+          />
+          <span> tmzzz@inbox.ru </span>
         </u-link>
         <u-link
           href="tel:+79180989694"
           class="flex items-center font-bold text-indigo-500 hover:text-blue-600 dark:text-gray-300"
         >
-          <u-icon name="i-lucide-phone" class="w-4 h-4 mr-2" />
-          +7 918 098 96 94
+          <u-icon
+            aria-hidden="true"
+            name="i-lucide-phone"
+            class="w-4 h-4 mr-2"
+          />
+          <span> +7 918 098 96 94 </span>
         </u-link>
       </div>
     </header>

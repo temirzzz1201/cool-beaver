@@ -2,13 +2,14 @@
   <div
     class="relative inline-flex items-center justify-center cursor-pointer group"
   >
-    <button
+    <u-button
+      aria-label="Закрыть"
       v-if="src"
       @click.stop="deleteAvatar"
       class="absolute top-[-6px] right-[-6px] text-2xl text-gray-900 rounded-full w-5 h-5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition cursor-pointer"
     >
       ×
-    </button>
+    </u-button>
 
     <nuxt-img
       v-if="src"

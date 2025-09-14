@@ -37,7 +37,9 @@
       />
     </u-form-field>
 
-    <u-button type="submit">Создать статью</u-button>
+    <u-button aria-label="Создать статью" type="submit"
+      >Создать статью</u-button
+    >
   </u-form>
 </template>
 

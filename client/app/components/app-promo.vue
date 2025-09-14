@@ -11,6 +11,7 @@
     <nuxt-link
       to="/contacts"
       class="px-8 py-3 rounded-lg bg-white text-indigo-500 font-semibold shadow hover:bg-indigo-700 hover:text-white dark:bg-gray-200 dark:text-gray-800 transition"
+      aria-label="Связаться с нами"
     >
       Связаться с нами
     </nuxt-link>

@@ -10,8 +10,11 @@
           :to="link.link"
           class="text-[16px] lg:text-[18px] font-medium text-indigo-600 dark:text-gray-300 hover:text-blue-600 whitespace-nowrap"
           active-class="font-bold text-blue-600"
+          :aria-label="link.title"
         >
-          {{ link.title }}
+          <span>
+            {{ link.title }}
+          </span>
         </u-link>
       </li>
       <client-only v-if="!colorMode?.forced">
@@ -20,6 +23,7 @@
           variant="ghost"
           @click="isDark = !isDark"
           class="text-indigo-700 dark:text-gray-300"
+          :aria-label="isDark ? 'Темная тема' : 'Светлая тема'"
         />
       </client-only>
     </ul>
@@ -29,8 +33,13 @@
         @click="open = !open"
         variant="ghost"
         class="text-indigo-700 dark:text-gray-200"
+        aria-label="Открыть меню навигации"
       >
-        <u-icon :name="open ? 'i-lucide-x' : 'i-lucide-menu'" class="w-6 h-6" />
+        <u-icon
+          :aria-hidden="true"
+          :name="open ? 'i-lucide-x' : 'i-lucide-menu'"
+          class="w-6 h-6"
+        />
       </u-button>
     </div>
 
@@ -48,10 +57,11 @@
       <template #body>
         <client-only v-if="!colorMode?.forced">
           <u-button
+            :aria-label="isDark ? 'Темная тема' : 'Светлая тема'"
             :icon="isDark ? 'i-lucide-moon' : 'i-lucide-sun'"
             variant="ghost"
             @click="isDark = !isDark"
-            class="text-indigo-700 dark:text-gray-300 absolute top-4 right-3"
+            class="text-indigo-700 dark:text-gray-300 absolute top-4 right-3 cursor-pointer"
           />
         </client-only>
         <ul class="flex flex-col mt-4 space-y-4">
@@ -60,8 +70,9 @@
               :to="link.link"
               class="text-lg font-medium text-indigo-500 dark:text-gray-200 hover:text-blue-600"
               active-class="font-bold text-blue-600"
+              :aria-label="link.title"
             >
-              {{ link.title }}
+              <span>{{ link.title }}</span>
             </u-link>
           </li>
         </ul>

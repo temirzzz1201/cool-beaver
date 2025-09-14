@@ -19,7 +19,10 @@
     <app-spinner v-else />
 
     <div>
-      <u-button icon="i-lucide-table" @click="downloadExcel('orders')"
+      <u-button
+        icon="i-lucide-table"
+        @click="downloadExcel('orders')"
+        aria-label="Выгрузить в exel"
         >Выгрузить в exel</u-button
       >
     </div>
