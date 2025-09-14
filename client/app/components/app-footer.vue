@@ -14,23 +14,10 @@
         <div>
           <h3 class="text-lg font-semibold text-white mb-4">Навигация</h3>
           <ul class="space-y-2 text-sm">
-            <li>
-              <NuxtLink to="/" class="hover:text-white">Главная</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/articles" class="hover:text-white"
-                >Статьи</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink to="/services" class="hover:text-white"
-                >Услуги</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink to="/contacts" class="hover:text-white"
-                >Контакты</NuxtLink
-              >
+            <li v-for="item in store.navLinks" :key="item.id">
+              <NuxtLink :to="item.link" class="hover:text-white">{{
+                item.title
+              }}</NuxtLink>
             </li>
           </ul>
         </div>
@@ -38,11 +25,14 @@
         <div>
           <h3 class="text-lg font-semibold text-white mb-4">Контакты</h3>
           <ul class="space-y-2 text-sm">
-            <li class="whitespace-nowrap">
-              📍 г. Москва, ул. Примерная, д. 12
-            </li>
-            <li class="whitespace-nowrap">📞 +7 (999) 123-45-67</li>
-            <li class="whitespace-nowrap">✉️ info@company.ru</li>
+            <u-link class="flex text-white" href="mailto:tmzzz@inbox.ru">
+              <u-icon name="i-lucide-mail" class="w-4 h-4 mr-2" />
+              tmzzz@inbox.ru
+            </u-link>
+            <u-link class="flex text-white" href="tel:+79180989694">
+              <u-icon name="i-lucide-phone" class="w-4 h-4 mr-2" />
+              +7 918 098 96 94
+            </u-link>
           </ul>
         </div>
 
@@ -71,3 +61,8 @@
     </div>
   </footer>
 </template>
+
+<script setup lang="ts">
+import { useMainStore } from "#imports";
+const store = useMainStore();
+</script>
