@@ -3,15 +3,12 @@
     class="relative w-full min-h-[450px] md:min-h-[550px] lg:min-h-[900px] flex items-center"
   >
     <NuxtImg
-      src="/hero.png"
+      src="/hero.webp"
       alt="Профессиональные разнорабочие для любых задач"
-      format="webp"
-      sizes="100vw sm:100vw md:100vw lg:100vw"
       width="1920"
       height="1080"
       class="absolute inset-0 w-full h-full object-cover"
       preload
-      priority
       fetchpriority="high"
     />
 

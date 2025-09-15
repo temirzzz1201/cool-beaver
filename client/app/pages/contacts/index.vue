@@ -43,7 +43,7 @@
         :schema="schema"
         :state="state"
         @submit="sendOrder"
-        class="w-full max-w-lg space-y-4"
+        class="w-full max-w-[320px] space-y-4"
         button-title="Оставить заявку"
       >
         <u-form-field label="Имя" name="name">
